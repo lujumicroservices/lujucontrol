@@ -14,7 +14,7 @@ import {
 } from '../MembersApi';
 
 /**
- * The contacts list.
+ * The members list.
  */
 function MembersList() {
 	const { data, isLoading } = useGetMembersListQuery();
@@ -61,7 +61,7 @@ function MembersList() {
 							{group?.children?.map((item: Members) => (
 								<MembersListItem
 									key={item.id}
-									contact={item}
+									member={item}
 								/>
 							))}
 						</List>

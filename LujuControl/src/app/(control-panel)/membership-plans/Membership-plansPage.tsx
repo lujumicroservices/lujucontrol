@@ -18,7 +18,7 @@ const Root = styled(FusePageSimple)(({ theme }) => ({
 	'& .FusePageSimple-sidebarContent': {}
 }));
 
-function Membership-plansPage() {
+function MembershipplansPage() {
 	const { t } = useTranslation('membership-planspage');
 
 	return (
@@ -39,4 +39,4 @@ function Membership-plansPage() {
 	);
 }
 
-export default Membership-plansPage;
+export default MembershipplansPage;

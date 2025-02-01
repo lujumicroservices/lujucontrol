@@ -19,27 +19,27 @@ const MembersApi = api
 				query: (queryArg) => ({
 					url: `/api/mock/members/items`,
 					method: 'POST',
-					body: queryArg.contact
+					body: queryArg.member
 				}),
 				invalidatesTags: ['members']
 			}),
 			getMembersItem: build.query<GetMembersItemApiResponse, GetMembersItemApiArg>({
-				query: (contactId) => ({
-					url: `/api/mock/members/items/${contactId}`
+				query: (memberId) => ({
+					url: `/api/mock/members/items/${memberId}`
 				}),
 				providesTags: ['members_item']
 			}),
 			updateMembersItem: build.mutation<UpdateMembersItemApiResponse, UpdateMembersItemApiArg>({
-				query: (contact) => ({
-					url: `/api/mock/members/items/${contact.id}`,
+				query: (member) => ({
+					url: `/api/mock/members/items/${member.id}`,
 					method: 'PUT',
-					body: contact
+					body: member
 				}),
 				invalidatesTags: ['members_item', 'members']
 			}),
 			deleteMembersItem: build.mutation<DeleteMembersItemApiResponse, DeleteMembersItemApiArg>({
-				query: (contactId) => ({
-					url: `/api/mock/members/items/${contactId}`,
+				query: (memberId) => ({
+					url: `/api/mock/members/items/${memberId}`,
 					method: 'DELETE'
 				}),
 				invalidatesTags: ['members']
@@ -92,34 +92,14 @@ export type UpdateMembersItemApiResponse = /** status 200 Members Updated */ Mem
 export type UpdateMembersItemApiArg = Members;
 
 export type DeleteMembersItemApiResponse = unknown;
-export type DeleteMembersItemApiArg = string;
+export type DeleteMembersItemApiArg = number;
 
 export type GetMembersListApiResponse = /** status 200 OK */ Members[];
 export type GetMembersListApiArg = void;
 
 export type CreateMembersItemApiResponse = /** status 201 Created */ Members;
 export type CreateMembersItemApiArg = {
-	contact: Members;
-};
-
-export type GetMembersTagApiResponse = /** status 200 Tag Found */ Tag;
-export type GetMembersTagApiArg = string;
-
-export type GetMembersCountriesApiResponse = /** status 200 */ Country[];
-export type GetMembersCountriesApiArg = void;
-
-export type UpdateMembersTagApiResponse = /** status 200 */ Tag;
-export type UpdateMembersTagApiArg = Tag;
-
-export type DeleteMembersTagApiResponse = unknown;
-export type DeleteMembersTagApiArg = string;
-
-export type GetMembersTagsApiResponse = /** status 200 OK */ Tag[];
-export type GetMembersTagsApiArg = void;
-
-export type CreateMembersTagApiResponse = /** status 200 OK */ Tag;
-export type CreateMembersTagApiArg = {
-	tag: Tag;
+	member: Members;
 };
 
 export type MembersPhoneNumber = {
@@ -134,24 +114,31 @@ export type MembersEmail = {
 };
 
 export type Members = {
-	id: string;
-	avatar?: string;
-	background?: string;
-	name: string;
-	emails?: MembersEmail[];
-	phoneNumbers?: MembersPhoneNumber[];
-	title?: string;
-	company?: string;
-	birthday?: string;
-	address?: string;
-	notes?: string;
-	tags?: string[];
+	address_line_1: string;
+	address_line_2: string | null;
+	birthdate: string;
+	city: string;
+	country: string;
+	created_at: string | null;
+	email: string;
+	end_date: string;
+	first_name: string;
+	id: number | null;
+	last_name: string;
+	membership_id: number | null;
+	phone: string | null;
+	postal_code: string;
+	start_date: string;
+	state: string;
+	updated_at: string | null;
 };
 
-export type Tag = {
-	id: string;
-	title: string;
-};
+// Utility function for derived/composed fields
+export const getMemberDisplayData = (memberData: Members) => ({
+	fullName: `${memberData.first_name} ${memberData.last_name}`,
+	fullAddress: `${memberData.address_line_1}, ${memberData.address_line_2 ? memberData.address_line_2 + ", " : ""}${memberData.city}, ${memberData.state}, ${memberData.country} - ${memberData.postal_code}`,
+});
+
 
 export type Country = {
 	id?: string;
@@ -206,18 +193,18 @@ export const selectFilteredMembersList = (members: Members[]) =>
  * Select grouped members
  */
 export const selectGroupedFilteredMembers = (members: Members[]) =>
-	createSelector([selectFilteredMembersList(members)], (members) => {
-		if (!members) {
+	createSelector([selectFilteredMembersList(members)], (filteredMembers) => {
+		if (!filteredMembers) {
 			return [];
 		}
 
-		const sortedMembers = [...members]?.sort((a, b) =>
+		const sortedMembers = [...filteredMembers]?.sort((a, b) =>
 			a?.name?.localeCompare(b.name, 'es', { sensitivity: 'base' })
 		);
 
 		const groupedObject: Record<string, GroupedMembers> = sortedMembers?.reduce<AccumulatorType>((r, e) => {
 			// get first letter of name of current element
-			const group = e.name[0];
+			const group = e.first_name[0];
 
 			// if there is no property in accumulator with this letter create it
 			if (!r[group]) r[group] = { group, children: [e] };

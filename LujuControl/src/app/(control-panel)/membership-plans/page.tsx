@@ -1,3 +1,3 @@
-import Membership-plansPage from './Membership-plansPage';
+import MembershipplansPage from './Membership-plansPage';
 
-export default Membership-plansPage;
+export default MembershipplansPage;

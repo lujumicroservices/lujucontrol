@@ -41,7 +41,7 @@ function MembersApp(props: MembersAppProps) {
 	useGetMembersTagsQuery();
 
 	useEffect(() => {
-		setRightSidebarOpen(!!routeParams.contactId);
+		setRightSidebarOpen(!!routeParams.memberId);
 	}, [routeParams]);
 
 	return (
@@ -51,7 +51,7 @@ function MembersApp(props: MembersAppProps) {
 			ref={pageLayout}
 			rightSidebarContent={<MembersSidebarContent>{children}</MembersSidebarContent>}
 			rightSidebarOpen={rightSidebarOpen}
-			rightSidebarOnClose={() => navigate('/apps/contacts')}
+			rightSidebarOnClose={() => navigate('/members')}
 			rightSidebarWidth={640}
 			rightSidebarVariant="temporary"
 			scroll={isMobile ? 'normal' : 'content'}

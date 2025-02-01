@@ -18,7 +18,7 @@ const Root = styled(FusePageSimple)(({ theme }) => ({
 	'& .FusePageSimple-sidebarContent': {}
 }));
 
-function Access-controlPage() {
+function AccesscontrolPage() {
 	const { t } = useTranslation('access-controlpage');
 
 	return (
@@ -39,4 +39,4 @@ function Access-controlPage() {
 	);
 }
 
-export default Access-controlPage;
+export default AccesscontrolPage;

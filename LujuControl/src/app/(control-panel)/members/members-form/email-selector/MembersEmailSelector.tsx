@@ -13,7 +13,7 @@ type MembersEmailSelectorProps = {
 };
 
 /**
- * The contact email selector.
+ * The member email selector.
  */
 function MembersEmailSelector(props: MembersEmailSelectorProps) {
 	const { value, onChange, className, ref } = props;

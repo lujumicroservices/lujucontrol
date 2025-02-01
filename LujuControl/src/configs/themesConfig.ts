@@ -49,7 +49,7 @@ export const themesConfig: FuseThemesType = {
 				contrastText: '#FFFFFF'
 			},
 			background: {
-				paper: '#F4F4F4',
+				paper: '#FFFFFF',
 				default: '#E8E8E8'
 			},
 			error: {

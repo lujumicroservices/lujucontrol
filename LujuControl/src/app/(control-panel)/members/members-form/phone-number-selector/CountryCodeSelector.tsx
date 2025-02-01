@@ -1,7 +1,6 @@
 import _ from 'lodash';
 import { MouseEvent, useState } from 'react';
 import Button from '@mui/material/Button';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import Box from '@mui/system/Box';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
@@ -43,7 +42,6 @@ function CountryCodeSelector(props: CountryCodeSelectorProps) {
 				aria-expanded={open ? 'true' : undefined}
 				disableElevation
 				onClick={handleClick}
-				endIcon={<KeyboardArrowDownIcon />}
 				disableRipple
 			>
 				<Box

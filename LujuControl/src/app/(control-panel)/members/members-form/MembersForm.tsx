@@ -27,47 +27,41 @@ import {
 	useCreateMembersItemMutation,
 	useDeleteMembersItemMutation,
 	useGetMembersItemQuery,
-	useGetMembersTagsQuery,
 	useUpdateMembersItemMutation,
-	Members,
-	Tag
+	Members
 } from '../MembersApi';
 import MembersModel from '../models/MembersModel';
 
-function BirtdayIcon() {
+function BirthdayIcon() {
 	return <FuseSvgIcon size={20}>heroicons-solid:cake</FuseSvgIcon>;
 }
+
+function CalendarIcon() {
+	return <FuseSvgIcon size={20}>heroicons-solid:calendar-days</FuseSvgIcon>;
+}
+
+
 
 type FormType = Members;
 
 /**
  * Form Validation Schema
  */
-
-// Zod schema for MembersEmail
-const MembersEmailSchema = z.object({
-	email: z.string().optional(),
-	type: z.string().optional()
-});
-
-// Zod schema for MembersPhoneNumber
-const MembersPhoneNumberSchema = z.object({
-	number: z.string().optional(),
-	type: z.string().optional()
-});
-
 const schema = z.object({
-	avatar: z.string().optional(),
-	background: z.string().optional(),
-	name: z.string().min(1, { message: 'Name is required' }),
-	emails: z.array(MembersEmailSchema).optional(),
-	phoneNumbers: z.array(MembersPhoneNumberSchema).optional(),
-	title: z.string().optional(),
-	company: z.string().optional(),
-	birthday: z.string().optional(),
-	address: z.string().optional(),
-	notes: z.string().optional(),
-	tags: z.array(z.string()).optional()
+	first_name: z.string().min(1).max(100), // Varchar(100), not nullable
+	last_name: z.string().min(1).max(100), // Varchar(100), not nullable
+	email: z.string().email().max(150), // Varchar(150), not nullable
+	phone: z.string().max(20).nullable().optional(), // Varchar(20), nullable
+	address_line_1: z.string().min(1).max(255), // Varchar(255), not nullable
+	address_line_2: z.string().max(255).nullable().optional(), // Varchar(255), nullable
+	city: z.string().min(1).max(100), // Varchar(100), not nullable
+	state: z.string().min(1).max(100), // Varchar(100), not nullable
+	postal_code: z.string().min(1).max(20), // Varchar(20), not nullable
+	country: z.string().min(1).max(100), // Varchar(100), not nullable
+	birthdate: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, 'Invalid date format'), // Date, not nullable
+	start_date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, 'Invalid date format'), // Date, not nullable
+	end_date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, 'Invalid date format'), // Date, not nullable
+
 });
 
 type MembersFormProps = {
@@ -75,25 +69,23 @@ type MembersFormProps = {
 };
 
 /**
- * The contact form.
+ * The member form.
  */
 function MembersForm(props: MembersFormProps) {
 	const { isNew } = props;
 	const navigate = useNavigate();
 	const dispatch = useAppDispatch();
 
-	const routeParams = useParams<{ contactId: string }>();
-	const { contactId } = routeParams;
+	const routeParams = useParams<{ memberId: string }>();
+	const { memberId } = routeParams;
 
-	const { data: contact, isError } = useGetMembersItemQuery(contactId, {
-		skip: !contactId || contactId === 'new'
+	const { data: member, isError } = useGetMembersItemQuery(memberId, {
+		skip: !memberId || memberId === 'new'
 	});
 
 	const [createMembers] = useCreateMembersItemMutation();
 	const [updateMembers] = useUpdateMembersItemMutation();
 	const [deleteMembers] = useDeleteMembersItemMutation();
-
-	const { data: tags } = useGetMembersTagsQuery();
 
 	const { control, watch, reset, handleSubmit, formState } = useForm<FormType>({
 		mode: 'all',
@@ -108,43 +100,42 @@ function MembersForm(props: MembersFormProps) {
 		if (isNew) {
 			reset(MembersModel({}));
 		} else {
-			reset({ ...contact });
+			reset({ ...member });
 		}
 		// eslint-disable-next-line
-	}, [contact, reset, routeParams]);
+	}, [member, reset, routeParams]);
 
 	/**
 	 * Form Submit
 	 */
 	const onSubmit = useCallback(() => {
 		if (isNew) {
-			createMembers({ contact: form })
+			createMembers({ member: form })
 				.unwrap()
 				.then((action) => {
-					navigate(`/apps/contacts/${action.id}`);
+					navigate(`/members/${action.id}`);
 				});
 		} else {
-			updateMembers({ id: contact.id, ...form });
+			updateMembers({ id: member.id, ...form });
 		}
 		// eslint-disable-next-line
 	}, [form]);
 
 	function handleRemoveMembers() {
-		if (!contact) {
+		if (!member) {
 			return;
 		}
 
-		deleteMembers(contact.id).then(() => {
-			navigate('/apps/contacts');
+		deleteMembers(member.id).then(() => {
+			navigate('/members');
 		});
 	}
 
-	const background = watch('background');
-	const name = watch('name');
+	const name = watch('first_name') + ' ' + watch('last_name');
 
 	if (isError && !isNew) {
 		setTimeout(() => {
-			navigate('/apps/contacts');
+			navigate('/members');
 			dispatch(showMessage({ message: 'NOT FOUND' }));
 		}, 0);
 
@@ -163,13 +154,11 @@ function MembersForm(props: MembersFormProps) {
 					backgroundColor: 'background.default'
 				}}
 			>
-				{background && (
-					<img
-						className="absolute inset-0 object-cover w-full h-full"
-						src={background}
-						alt="user background"
-					/>
-				)}
+				<img
+					className="absolute inset-0 object-cover w-full h-full"
+					src="/assets/images/cards/default-bk.jpg"
+					alt="user background"
+				/>
 			</Box>
 
 			<div className="relative flex flex-col flex-auto items-center px-6 sm:px-12">
@@ -270,16 +259,16 @@ function MembersForm(props: MembersFormProps) {
 				</div>
 				<Controller
 					control={control}
-					name="name"
+					name="first_name"
 					render={({ field }) => (
 						<TextField
 							className="mt-8"
 							{...field}
-							label="Name"
-							placeholder="Name"
-							id="name"
-							error={!!errors.name}
-							helperText={errors?.name?.message}
+							label="First name"
+							placeholder="First name"
+							id="first_name"
+							error={!!errors.first_name}
+							helperText={errors?.first_name?.message}
 							variant="outlined"
 							required
 							fullWidth
@@ -293,206 +282,293 @@ function MembersForm(props: MembersFormProps) {
 						/>
 					)}
 				/>
-				<Controller
-					control={control}
-					name="tags"
-					render={({ field: { onChange, value } }) => (
-						<Autocomplete
-							multiple
-							id="tags"
-							className="mt-8"
-							options={tags || []}
-							disableCloseOnSelect
-							getOptionLabel={(option) => option?.title}
-							renderOption={(_props, option, { selected }) => (
-								<li {..._props}>
-									<Checkbox
-										style={{ marginRight: 8 }}
-										checked={selected}
-									/>
-									{option?.title}
-								</li>
-							)}
-							value={value ? value?.map((id) => _.find(tags, { id })) : ([] as Tag[])}
-							onChange={(_event, newValue) => {
-								onChange(newValue?.map((item) => item?.id));
-							}}
-							fullWidth
-							renderInput={(params) => (
-								<TextField
-									{...params}
-									label="Tags"
-									placeholder="Tags"
-								/>
-							)}
-						/>
-					)}
-				/>
 
 				<Controller
 					control={control}
-					name="title"
+					name="last_name"
 					render={({ field }) => (
 						<TextField
 							className="mt-8"
 							{...field}
-							label="Title"
-							placeholder="Job title"
-							id="title"
-							error={!!errors.title}
-							helperText={errors?.title?.message}
+							label="Last name"
+							placeholder="Last name"
+							id="last_name"
+							error={!!errors.last_name}
+							helperText={errors?.last_name?.message}
 							variant="outlined"
 							fullWidth
 							InputProps={{
 								startAdornment: (
 									<InputAdornment position="start">
-										<FuseSvgIcon size={20}>heroicons-solid:briefcase</FuseSvgIcon>
+										
 									</InputAdornment>
 								)
 							}}
 						/>
 					)}
-				/>
+				/>		
 
 				<Controller
 					control={control}
-					name="company"
+					name="email"
 					render={({ field }) => (
 						<TextField
 							className="mt-8"
 							{...field}
-							label="Company"
-							placeholder="Company"
-							id="company"
-							error={!!errors.company}
-							helperText={errors?.company?.message}
+							label="Email"
+							placeholder="Enter your email"
+							id="email"
+							error={!!errors.email}
+							helperText={errors?.email?.message}
 							variant="outlined"
 							fullWidth
 							InputProps={{
 								startAdornment: (
 									<InputAdornment position="start">
-										<FuseSvgIcon size={20}>heroicons-solid:building-office-2</FuseSvgIcon>
+										<FuseSvgIcon size={20}>heroicons-solid:envelope</FuseSvgIcon>
 									</InputAdornment>
-								)
+								),
 							}}
 						/>
 					)}
 				/>
-				<Controller
-					control={control}
-					name="emails"
-					render={({ field }) => (
-						<MembersEmailSelector
-							className="mt-8"
-							{...field}
-							value={field?.value}
-							onChange={(val) => field.onChange(val)}
-						/>
-					)}
-				/>
 
 				<Controller
 					control={control}
-					name="phoneNumbers"
-					render={({ field }) => (
-						<PhoneNumberSelector
-							className="mt-8"
-							{...field}
-							error={!!errors.phoneNumbers}
-							helperText={errors?.phoneNumbers?.message}
-							value={field.value}
-							onChange={(val) => field.onChange(val)}
-						/>
-					)}
-				/>
-
-				<Controller
-					control={control}
-					name="address"
+					name="phone"
 					render={({ field }) => (
 						<TextField
 							className="mt-8"
 							{...field}
-							label="Address"
-							placeholder="Address"
-							id="address"
-							error={!!errors.address}
-							helperText={errors?.address?.message}
+							label="Phone"
+							placeholder="Enter your phone number"
+							id="phone"
+							error={!!errors.phone}
+							helperText={errors?.phone?.message}
 							variant="outlined"
 							fullWidth
 							InputProps={{
 								startAdornment: (
 									<InputAdornment position="start">
-										<FuseSvgIcon size={20}>heroicons-solid:map-pin</FuseSvgIcon>
+										<FuseSvgIcon size={20}>heroicons-solid:phone</FuseSvgIcon>
 									</InputAdornment>
-								)
+								),
 							}}
 						/>
 					)}
 				/>
+
 				<Controller
 					control={control}
-					name="birthday"
+					name="address_line_1"
+					render={({ field }) => (
+						<TextField
+							className="mt-8"
+							{...field}
+							label="Address Line 1"
+							placeholder="Enter your address"
+							id="address_line_1"
+							error={!!errors.address_line_1}
+							helperText={errors?.address_line_1?.message}
+							variant="outlined"
+							fullWidth
+						/>
+					)}
+				/>
+
+				<Controller
+					control={control}
+					name="address_line_2"
+					render={({ field }) => (
+						<TextField
+							className="mt-8"
+							{...field}
+							label="Address Line 2"
+							placeholder="Enter additional address details"
+							id="address_line_2"
+							error={!!errors.address_line_2}
+							helperText={errors?.address_line_2?.message}
+							variant="outlined"
+							fullWidth
+						/>
+					)}
+				/>
+
+				<Controller
+					control={control}
+					name="city"
+					render={({ field }) => (
+						<TextField
+							className="mt-8"
+							{...field}
+							label="City"
+							placeholder="Enter your city"
+							id="city"
+							error={!!errors.city}
+							helperText={errors?.city?.message}
+							variant="outlined"
+							fullWidth
+						/>
+					)}
+				/>
+
+				<Controller
+					control={control}
+					name="state"
+					render={({ field }) => (
+						<TextField
+							className="mt-8"
+							{...field}
+							label="State"
+							placeholder="Enter your state"
+							id="state"
+							error={!!errors.state}
+							helperText={errors?.state?.message}
+							variant="outlined"
+							fullWidth
+						/>
+					)}
+				/>
+
+				<Controller
+					control={control}
+					name="postal_code"
+					render={({ field }) => (
+						<TextField
+							className="mt-8"
+							{...field}
+							label="Postal Code"
+							placeholder="Enter your postal code"
+							id="postal_code"
+							error={!!errors.postal_code}
+							helperText={errors?.postal_code?.message}
+							variant="outlined"
+							fullWidth
+						/>
+					)}
+				/>
+
+				<Controller
+					control={control}
+					name="country"
+					render={({ field }) => (
+						<TextField
+							className="mt-8"
+							{...field}
+							label="Country"
+							placeholder="Enter your country"
+							id="country"
+							error={!!errors.country}
+							helperText={errors?.country?.message}
+							variant="outlined"
+							fullWidth
+						/>
+					)}
+				/>
+
+				<Controller
+					control={control}
+					name="birthdate"
 					render={({ field: { value, onChange } }) => (
 						<DateTimePicker
 							value={new Date(value)}
 							onChange={(val) => {
-								onChange(val?.toISOString());
+								onChange(val?.toISOString());  // Ensures ISO string format
 							}}
 							className="mt-8 mb-4 w-full"
 							slotProps={{
 								textField: {
-									id: 'birthday',
-									label: 'Birthday',
+									id: 'birthdate',
+									label: 'Birthdate',
 									InputLabelProps: {
-										shrink: true
+										shrink: true,
 									},
 									fullWidth: true,
 									variant: 'outlined',
-									error: !!errors.birthday,
-									helperText: errors?.birthday?.message
+									error: !!errors.birthdate,
+									helperText: errors?.birthdate?.message,
 								},
 								actionBar: {
-									actions: ['clear', 'today']
-								}
+									actions: ['clear', 'today'],
+								},
 							}}
 							slots={{
-								openPickerIcon: BirtdayIcon
+								openPickerIcon: BirthdayIcon,
 							}}
 						/>
 					)}
 				/>
+
 				<Controller
 					control={control}
-					name="notes"
-					render={({ field }) => (
-						<TextField
-							className="mt-8"
-							{...field}
-							label="Notes"
-							placeholder="Notes"
-							id="notes"
-							error={!!errors.notes}
-							helperText={errors?.notes?.message}
-							variant="outlined"
-							fullWidth
-							multiline
-							minRows={5}
-							maxRows={10}
-							InputProps={{
-								className: 'max-h-min h-min items-start',
-								startAdornment: (
-									<InputAdornment
-										className="mt-4"
-										position="start"
-									>
-										<FuseSvgIcon size={20}>heroicons-solid:bars-3-bottom-left</FuseSvgIcon>
-									</InputAdornment>
-								)
+					name="start_date"
+					render={({ field: { value, onChange } }) => (
+						<DateTimePicker
+							value={new Date(value)}
+							onChange={(val) => {
+								onChange(val?.toISOString());  // Ensures ISO string format
+							}}
+							className="mt-8 mb-4 w-full"
+							slotProps={{
+								textField: {
+									id: 'start_date',
+									label: 'Start Date',
+									InputLabelProps: {
+										shrink: true,
+									},
+									fullWidth: true,
+									variant: 'outlined',
+									error: !!errors.start_date,
+									helperText: errors?.start_date?.message,
+								},
+								actionBar: {
+									actions: ['clear', 'today'],
+								},
+							}}
+							slots={{
+								openPickerIcon: CalendarIcon,
 							}}
 						/>
 					)}
 				/>
+
+				<Controller
+					control={control}
+					name="end_date"
+					render={({ field: { value, onChange } }) => (
+						<DateTimePicker
+							value={new Date(value)}
+							onChange={(val) => {
+								onChange(val?.toISOString());  // Ensures ISO string format
+							}}
+							className="mt-8 mb-4 w-full"
+							slotProps={{
+								textField: {
+									id: 'end_date',
+									label: 'End Date',
+									InputLabelProps: {
+										shrink: true,
+									},
+									fullWidth: true,
+									variant: 'outlined',
+									error: !!errors.end_date,
+									helperText: errors?.end_date?.message,
+								},
+								actionBar: {
+									actions: ['clear', 'today'],
+								},
+							}}
+							slots={{
+								openPickerIcon: CalendarIcon,
+							}}
+						/>
+					)}
+				/>
+
+
+
+
+
 			</div>
 			<Box
 				className="flex items-center mt-10 py-3.5 pr-4 pl-1 sm:pr-12 sm:pl-9 border-t"
@@ -509,7 +585,7 @@ function MembersForm(props: MembersFormProps) {
 				<Button
 					component={Link}
 					className="ml-auto"
-					to={`/apps/contacts/${contactId}`}
+					to={`/members/${memberId}`}
 				>
 					Cancel
 				</Button>

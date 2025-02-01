@@ -7,7 +7,7 @@ type MembersSidebarContentProps = {
 };
 
 /**
- * The contacts sidebar content.
+ * The members sidebar content.
  */
 function MembersSidebarContent({ children }: MembersSidebarContentProps) {
 	return (
@@ -23,7 +23,7 @@ function MembersSidebarContent({ children }: MembersSidebarContentProps) {
 					}
 				}}
 				component={NavLinkAdapter}
-				to="/apps/contacts"
+				to="/members"
 			>
 				<FuseSvgIcon>heroicons-outline:x-mark</FuseSvgIcon>
 			</IconButton>

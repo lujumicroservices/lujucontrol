@@ -8,14 +8,14 @@ import ListItemButton from '@mui/material/ListItemButton';
 import { Members } from '../MembersApi';
 
 type MembersListItemPropsType = {
-	contact: Members;
+	member: Members;
 };
 
 /**
- * The contact list item.
+ * The member list item.
  */
 function MembersListItem(props: MembersListItemPropsType) {
-	const { contact } = props;
+	const { member } = props;
 
 	return (
 		<>
@@ -23,17 +23,17 @@ function MembersListItem(props: MembersListItemPropsType) {
 				className="px-8 py-4"
 				sx={{ bgcolor: 'background.paper' }}
 				component={NavLinkAdapter}
-				to={`/apps/contacts/${contact.id}`}
+				to={`/members/${member.id}`}
 			>
 				<ListItemAvatar>
 					<Avatar
-						alt={contact.name}
-						src={contact.avatar}
+						alt={member.first_name}
+						src={member.avatar}
 					/>
 				</ListItemAvatar>
 				<ListItemText
 					classes={{ root: 'm-0', primary: 'font-medium leading-5 truncate' }}
-					primary={contact.name}
+					primary={member.first_name}
 					secondary={
 						<Typography
 							className="inline"
@@ -41,7 +41,7 @@ function MembersListItem(props: MembersListItemPropsType) {
 							variant="body2"
 							color="text.secondary"
 						>
-							{contact.title}
+							{member.membership_id}
 						</Typography>
 					}
 				/>

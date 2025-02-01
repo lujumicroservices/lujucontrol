@@ -4,13 +4,13 @@ import { redirect, useParams } from 'next/navigation';
 import MembersForm from '../members-form/MembersForm';
 
 function MembersPage() {
-	const { contactId } = useParams<{ contactId: string }>();
+	const { memberId } = useParams<{ memberId: string }>();
 
-	if (contactId === 'new') {
+	if (memberId === 'new') {
 		return <MembersForm isNew />;
 	}
 
-	redirect(`/apps/contacts/${contactId}/view`);
+	redirect(`/members/${memberId}/view`);
 
 	return null;
 }

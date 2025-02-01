@@ -1,16 +1,16 @@
 import { useGetMembersItemQuery } from './MembersApi';
 
 type MembersTitleProps = {
-	contactId?: string;
+	memberId?: string;
 };
 
 function MembersTitle(props: MembersTitleProps) {
-	const { contactId } = props;
-	const { data: contact } = useGetMembersItemQuery(contactId, {
-		skip: !contactId
+	const { memberId } = props;
+	const { data: member } = useGetMembersItemQuery(memberId, {
+		skip: !memberId
 	});
 
-	return contact?.name || 'Members';
+	return member?.first_name || 'Members';
 }
 
 export default MembersTitle;

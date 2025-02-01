@@ -1,6 +1,6 @@
 export const API_BASE_URL =
 	process.env.NODE_ENV === 'development'
-		? `http://localhost:${process.env.NEXT_PUBLIC_PORT || 3000}`
+		? `http://localhost:${process.env.NEXT_PUBLIC_PORT || 3001}`
 		: process.env.NEXT_PUBLIC_BASE_URL || '/';
 
 // Define the types for options and configuration
@@ -41,9 +41,9 @@ const apiFetch = async (endpoint: string, options: FetchOptions = {}) => {
 		headers: {
 			...(method !== 'GET' && { 'Content-Type': 'application/json' }),
 			...globalHeaders,
-			...headers
+			...headers,
 		},
-		...restOptions
+		...restOptions,
 	};
 
 	try {

@@ -12,7 +12,7 @@ import { setSearchText, resetSearchText, selectSearchText } from './membersAppSl
 import { selectFilteredMembersList, useGetMembersListQuery } from './MembersApi';
 
 /**
- * The contacts header.
+ * The members header.
  */
 function MembersHeader() {
 	const dispatch = useAppDispatch();
@@ -51,7 +51,7 @@ function MembersHeader() {
 						className="text-base font-medium ml-0.5"
 						color="text.secondary"
 					>
-						{`${filteredData?.length} contacts`}
+						{`${filteredData?.length} members`}
 					</Typography>
 				</motion.span>
 			</div>
@@ -65,7 +65,7 @@ function MembersHeader() {
 					<FuseSvgIcon color="action">heroicons-outline:magnifying-glass</FuseSvgIcon>
 
 					<Input
-						placeholder="Search contacts"
+						placeholder="Search members"
 						className="flex flex-1"
 						disableUnderline
 						fullWidth
@@ -81,7 +81,7 @@ function MembersHeader() {
 					variant="contained"
 					color="secondary"
 					component={NavLinkAdapter}
-					to="/apps/contacts/new"
+					to="/members/new"
 				>
 					<FuseSvgIcon size={20}>heroicons-outline:plus</FuseSvgIcon>
 					<span className="hidden sm:flex mx-2">Add</span>
