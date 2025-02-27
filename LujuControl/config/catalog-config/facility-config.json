@@ -1,0 +1,53 @@
+{
+  "moduleName": "Facility",
+  "moduleNameLower": "facility",
+  "fields": [
+    {
+      "name": "name",
+      "type": "string",
+      "label": "Facility Name",
+      "placeholder": "Enter facility name",
+      "validation": "z.string().min(1).max(100)",
+      "required": true,
+      "icon": "heroicons-solid:building"
+    },
+    {
+      "name": "type",
+      "type": "string",
+      "label": "Facility Type",
+      "placeholder": "Enter facility type (e.g., gym, pool)",
+      "validation": "z.string().min(1).max(50)",
+      "required": true,
+      "icon": "heroicons-solid:tag"
+    },
+    {
+      "name": "capacity",
+      "type": "number",
+      "label": "Capacity",
+      "placeholder": "Enter facility capacity",
+      "validation": "z.number().min(0)",
+      "required": true,
+      "icon": "heroicons-solid:users"
+    },
+    {
+      "name": "rules",
+      "type": "string",
+      "label": "Rules",
+      "placeholder": "Enter facility rules",
+      "validation": "z.string().min(1).max(500)",
+      "required": true,
+      "icon": "heroicons-solid:document-text"
+    }
+  ],
+  "apiEndpoints": {
+    "getList": "/api/facilities",
+    "createItem": "/api/facilities",
+    "getItem": "/api/facilities/{id}",
+    "updateItem": "/api/facilities/{id}",
+    "deleteItem": "/api/facilities/{id}"
+  },
+  "tagTypes": [
+    "facility_item",
+    "facilities"
+  ]
+}

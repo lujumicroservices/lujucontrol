@@ -8,7 +8,7 @@ const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_ANO
 /**
  * GET api/member/items/{id}
  */
-export async function GET(req: Request, props: { params: Promise<{ id: number }> }) {
+export async function GET(req: Request, props: { params: Promise<{ id: string }> }) {
 	const { id } = await props.params;
 
 	const { data: item, error } = await supabase.from('members').select().eq('id', id).single();
@@ -23,15 +23,15 @@ export async function GET(req: Request, props: { params: Promise<{ id: number }>
 /**
  * PUT api/members/items/{id}
  */
-export async function PUT(req: Request, props: { params: Promise<{ id: number }> }) {
+export async function PUT(req: Request, props: { params: Promise<{ id: string }> }) {
 	const { id } = await props.params;
 	const data = (await req.json()) as Tables<'members'>;
 
 	const { data: updatedItem, error } = await supabase
-		.from('member') // Replace with your Supabase table name
+		.from('members') // Replace with your Supabase table name
 		.update(data)
 		.eq('id', id)
-		.single();
+		.select();
 
 	if (error || !updatedItem) {
 		return new Response(JSON.stringify({ message: 'Item not found' }), { status: 404 });
@@ -43,11 +43,11 @@ export async function PUT(req: Request, props: { params: Promise<{ id: number }>
 /**
  * DELETE api/members/items/{id}
  */
-export async function DELETE(req: Request, props: { params: Promise<{ id: number }> }) {
+export async function DELETE(req: Request, props: { params: Promise<{ id: string }> }) {
 	const { id } = await props.params;
 
 	const { error } = await supabase
-		.from('member') // Replace with your Supabase table name
+		.from('members') // Replace with your Supabase table name
 		.delete()
 		.eq('id', id);
 

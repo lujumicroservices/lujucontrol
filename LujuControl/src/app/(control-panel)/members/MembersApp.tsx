@@ -8,7 +8,7 @@ import useThemeMediaQuery from '@fuse/hooks/useThemeMediaQuery';
 import useNavigate from '@fuse/hooks/useNavigate';
 import MembersHeader from './MembersHeader';
 import MembersList from './members-list/MembersList';
-import { useGetMembersListQuery, useGetMembersCountriesQuery, useGetMembersTagsQuery } from './MembersApi';
+import { useGetMembersListQuery, useGetMembersCountriesQuery } from './MembersApi';
 import MembersSidebarContent from './MembersSidebarContent';
 
 const Root = styled(FusePageSimple)(({ theme }) => ({
@@ -38,7 +38,6 @@ function MembersApp(props: MembersAppProps) {
 	const isMobile = useThemeMediaQuery((theme) => theme.breakpoints.down('lg'));
 	useGetMembersListQuery();
 	useGetMembersCountriesQuery();
-	useGetMembersTagsQuery();
 
 	useEffect(() => {
 		setRightSidebarOpen(!!routeParams.memberId);

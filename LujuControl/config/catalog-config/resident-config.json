@@ -1,0 +1,71 @@
+{
+  "moduleName": "Resident",
+  "moduleNameLower": "resident",
+  "fields": [
+    {
+      "name": "first_name",
+      "type": "string",
+      "label": "First Name",
+      "placeholder": "Enter first name",
+      "validation": "z.string().min(1).max(100)",
+      "required": true,
+      "icon": "heroicons-solid:user-circle"
+    },
+    {
+      "name": "last_name",
+      "type": "string",
+      "label": "Last Name",
+      "placeholder": "Enter last name",
+      "validation": "z.string().min(1).max(100)",
+      "required": true,
+      "icon": "heroicons-solid:user-circle"
+    },
+    {
+      "name": "email",
+      "type": "string",
+      "label": "Email",
+      "placeholder": "Enter email",
+      "validation": "z.string().email().max(150)",
+      "required": true,
+      "icon": "heroicons-solid:envelope"
+    },
+    {
+      "name": "phone",
+      "type": "string",
+      "label": "Phone",
+      "placeholder": "Enter phone number",
+      "validation": "z.string().max(20).nullable().optional()",
+      "required": false,
+      "icon": "heroicons-solid:phone"
+    },
+    {
+      "name": "property_id",
+      "type": "string",
+      "label": "Property ID",
+      "placeholder": "Enter property ID",
+      "validation": "z.string().min(1).max(50)",
+      "required": true,
+      "icon": "heroicons-solid:home"
+    },
+    {
+      "name": "role",
+      "type": "string",
+      "label": "Role",
+      "placeholder": "Enter role (owner/tenant)",
+      "validation": "z.string().min(1).max(20)",
+      "required": true,
+      "icon": "heroicons-solid:identification"
+    }
+  ],
+  "apiEndpoints": {
+    "getList": "/api/residents",
+    "createItem": "/api/residents",
+    "getItem": "/api/residents/{id}",
+    "updateItem": "/api/residents/{id}",
+    "deleteItem": "/api/residents/{id}"
+  },
+  "tagTypes": [
+    "resident_item",
+    "residents"
+  ]
+}

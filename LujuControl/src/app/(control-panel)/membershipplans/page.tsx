@@ -1,3 +1,5 @@
-import MembershipplansPage from './MembershipplansPage';
+function MembershipPlanPage() {
+	return null;
+}
 
-export default MembershipplansPage;
+export default MembershipPlanPage;

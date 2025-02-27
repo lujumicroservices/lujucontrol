@@ -16,16 +16,17 @@ import _ from 'lodash';
 import { showMessage } from '@fuse/core/FuseMessage/fuseMessageSlice';
 import { useAppDispatch } from 'src/store/hooks';
 import useNavigate from '@fuse/hooks/useNavigate';
-import { useGetMembersItemQuery, useGetMembersCountriesQuery, useGetMembersTagsQuery , getMemberDisplayData } from '../../MembersApi';
+import { useGetMembersItemQuery, useGetMembersCountriesQuery } from '../../MembersApi';
 
 /**
  * The member view.
  */
 function MembersView() {
-	const { data: countries } = useGetMembersCountriesQuery();
-	const { data: tags } = useGetMembersTagsQuery();
+	const { data: countries } = useGetMembersCountriesQuery({});
+
 	const routeParams = useParams<{ memberId: string }>();
 	const { memberId } = routeParams;
+	
 	const {
 		data: member,
 		isLoading,
@@ -73,6 +74,7 @@ function MembersView() {
 					/>
 				
 			</Box>
+
 			<div className="relative flex flex-col flex-auto items-center p-6 pt-0 sm:p-12 sm:pt-0">
 				<div className="w-full max-w-5xl">
 					<div className="flex flex-auto items-end -mt-16">
@@ -82,7 +84,7 @@ function MembersView() {
 								borderStyle: 'solid',
 								borderColor: 'background.paper',
 								backgroundColor: 'background.default',
-								color: 'text.secondary'
+								color: 'text.secondary',
 							}}
 							className="w-32 h-32 text-16 font-bold"
 							src={member.avatar}
@@ -119,85 +121,72 @@ function MembersView() {
 					<Divider className="mt-4 mb-6" />
 
 					<div className="flex flex-col space-y-8">
-						{member.first_name && (
-							<div className="flex items-center">
-								<FuseSvgIcon>heroicons-outline:briefcase</FuseSvgIcon>
-								<div className="ml-6 leading-6">{getMemberDisplayData(member).fullName}</div>
-							</div>
-						)}
+						<div className="flex items-center">
+							<FuseSvgIcon>heroicons-outline:briefcase</FuseSvgIcon>
+							<div className="ml-6 leading-6">{`${member.first_name} ${member.last_name}`}</div>
+						</div>
 
 						<div className="flex">
 							<FuseSvgIcon>heroicons-outline:envelope</FuseSvgIcon>
-							<div className="min-w-0 ml-6 space-y-1">
-								<div
-									className="flex items-center leading-6"
-									key={member.email}
+							<div className="ml-6">
+								<a
+									className="hover:underline text-primary-500"
+									href={`mailto:${member.email}`}
 								>
-									<a
-										className="hover:underline text-primary-500"
-										href={`mailto: ${member.email}`}
-										target="_blank"
-										rel="noreferrer"
-									>
-										{member.email}
-									</a>
-									{member.email && (
-										<Typography
-											className="text-md truncate"
-											color="text.secondary"
-										>
-											<span className="mx-2">&bull;</span>
-											<span className="font-medium">Personal</span>
-										</Typography>
-									)}
-								</div>
+									{member.email}
+								</a>
 							</div>
 						</div>
 
 						<div className="flex">
 							<FuseSvgIcon>heroicons-outline:phone</FuseSvgIcon>
-							<div className="min-w-0 ml-6 space-y-1">
-								<div
-									className="flex items-center leading-6"
-									key="1"
-								>
-									<Box
-										className="hidden sm:flex w-6 h-4 overflow-hidden"
-										sx={{
-											background: "url('/assets/images/members/flags.png') no-repeat 0 0",
-											backgroundSize: '24px 3876px',
-											backgroundPosition: getCountryByIso(member.country)?.flagImagePos
-										}}
-									/>
+							<div className="ml-6">{member.phone || 'Not provided'}</div>
+						</div>
 
-									<div className="sm:ml-3 font-mono">{getCountryByIso(member.country)?.code}</div>
-
-									<div className="ml-2.5 font-mono">{member.phone}</div>
-
-									<Typography
-										className="text-md truncate"
-										color="text.secondary"
-									>
-										<span className="mx-2">&bull;</span>
-										<span className="font-medium">Personal</span>
-									</Typography>
-								</div>
+						<div className="flex">
+							<FuseSvgIcon>heroicons-outline:map-pin</FuseSvgIcon>
+							<div className="ml-6">
+								{member.address_line_1}
+								{member.address_line_2 && `, ${member.address_line_2}`}
+								{`, ${member.city}, ${member.state}, ${member.postal_code}, ${member.country}`}
 							</div>
 						</div>
 
-						{member.address_line_1 && (
-							<div className="flex items-center">
-								<FuseSvgIcon>heroicons-outline:map-pin</FuseSvgIcon>
-								<div className="ml-6 leading-6">{getMemberDisplayData(member).fullAddress}</div>
+						<div className="flex">
+							<FuseSvgIcon>heroicons-outline:cake</FuseSvgIcon>
+							<div className="ml-6">
+								{member.birthdate
+									? format(new Date(member.birthdate), 'MMMM d, y')
+									: 'Not provided'}
 							</div>
-						)}
+						</div>
 
-						{member.birthdate && (
-							<div className="flex items-center">
-								<FuseSvgIcon>heroicons-outline:cake</FuseSvgIcon>
-								<div className="ml-6 leading-6">{format(new Date(member.birthdate), 'MMMM d, y')}</div>
+						<div className="flex">
+							<FuseSvgIcon>heroicons-outline:calendar</FuseSvgIcon>
+							<div className="ml-6">
+								<strong>Start Date:</strong>{' '}
+								{format(new Date(member.start_date), 'MMMM d, y')} <br />
+								<strong>End Date:</strong>{' '}
+								{member.end_date
+									? format(new Date(member.end_date), 'MMMM d, y')
+									: 'Ongoing'}
 							</div>
-						)}
+						</div>
+
+						<div className="flex">
+							<FuseSvgIcon>heroicons-outline:clock</FuseSvgIcon>
+							<div className="ml-6">
+								<strong>Created At:</strong>{' '}
+								{member.created_at
+									? format(new Date(member.created_at), 'MMMM d, y, h:mm a')
+									: 'Unknown'}{' '}
+								<br />
+								<strong>Updated At:</strong>{' '}
+								{member.updated_at
+									? format(new Date(member.updated_at), 'MMMM d, y, h:mm a')
+									: 'Not updated'}
+							</div>
+						</div>
 
 						{member.notes && (
 							<div className="flex">
@@ -211,6 +200,7 @@ function MembersView() {
 					</div>
 				</div>
 			</div>
+
 		</>
 	);
 }

@@ -22,9 +22,9 @@ const MembersModel = (data: PartialDeep<Members>): Members =>
 		phone: '',
 		postal_code: '',
 		state: '',
-		created_at: '',
-		id: '',
-		updated_at: ''
+		created_at: null,
+		id: null,
+		updated_at: null
 	});
 
 

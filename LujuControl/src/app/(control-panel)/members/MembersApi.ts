@@ -44,40 +44,9 @@ const MembersApi = api
 				}),
 				invalidatesTags: ['members']
 			}),
-			getMembersTag: build.query<GetMembersTagApiResponse, GetMembersTagApiArg>({
-				query: (tagId) => ({ url: `/api/mock/members/tags/${tagId}` }),
-				providesTags: ['members_tag']
-			}),
-			updateMembersTag: build.mutation<UpdateMembersTagApiResponse, UpdateMembersTagApiArg>({
-				query: (tag) => ({
-					url: `/api/mock/members/tags/${tag.id}`,
-					method: 'PUT',
-					body: tag
-				}),
-				invalidatesTags: ['members_tags']
-			}),
-			deleteMembersTag: build.mutation<DeleteMembersTagApiResponse, DeleteMembersTagApiArg>({
-				query: (tagId) => ({
-					url: `/api/mock/members/tags/${tagId}`,
-					method: 'DELETE'
-				}),
-				invalidatesTags: ['members_tags']
-			}),
-			getMembersTags: build.query<GetMembersTagsApiResponse, GetMembersTagsApiArg>({
-				query: () => ({ url: `/api/mock/members/tags` }),
-				providesTags: ['members_tags']
-			}),
 			getMembersCountries: build.query<GetMembersCountriesApiResponse, GetMembersCountriesApiArg>({
 				query: () => ({ url: `/api/mock/countries` }),
 				providesTags: ['countries']
-			}),
-			createMembersTag: build.mutation<CreateMembersTagApiResponse, CreateMembersTagApiArg>({
-				query: (queryArg) => ({
-					url: `/api/mock/members/tags`,
-					method: 'POST',
-					body: queryArg.tag
-				}),
-				invalidatesTags: ['members_tags']
 			})
 		}),
 		overrideExisting: false
@@ -92,7 +61,7 @@ export type UpdateMembersItemApiResponse = /** status 200 Members Updated */ Mem
 export type UpdateMembersItemApiArg = Members;
 
 export type DeleteMembersItemApiResponse = unknown;
-export type DeleteMembersItemApiArg = number;
+export type DeleteMembersItemApiArg = string;
 
 export type GetMembersListApiResponse = /** status 200 OK */ Members[];
 export type GetMembersListApiArg = void;
@@ -100,17 +69,6 @@ export type GetMembersListApiArg = void;
 export type CreateMembersItemApiResponse = /** status 201 Created */ Members;
 export type CreateMembersItemApiArg = {
 	member: Members;
-};
-
-export type MembersPhoneNumber = {
-	country: string;
-	phoneNumber: string;
-	label?: string;
-};
-
-export type MembersEmail = {
-	email: string;
-	label?: string;
 };
 
 export type Members = {
@@ -123,9 +81,9 @@ export type Members = {
 	email: string;
 	end_date: string;
 	first_name: string;
-	id: number | null;
+	id: string | null;
 	last_name: string;
-	membership_id: number | null;
+	membership_id: string | null;
 	phone: string | null;
 	postal_code: string;
 	start_date: string;
@@ -161,12 +119,7 @@ export const {
 	useDeleteMembersItemMutation,
 	useGetMembersListQuery,
 	useCreateMembersItemMutation,
-	useGetMembersTagQuery,
 	useGetMembersCountriesQuery,
-	useUpdateMembersTagMutation,
-	useDeleteMembersTagMutation,
-	useGetMembersTagsQuery,
-	useCreateMembersTagMutation
 } = MembersApi;
 
 export type MembersApiType = {

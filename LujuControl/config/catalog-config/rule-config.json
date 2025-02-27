@@ -1,0 +1,44 @@
+{
+  "moduleName": "Rule",
+  "moduleNameLower": "rule",
+  "fields": [
+    {
+      "name": "title",
+      "type": "string",
+      "label": "Rule Title",
+      "placeholder": "Enter rule title",
+      "validation": "z.string().min(1).max(100)",
+      "required": true,
+      "icon": "heroicons-solid:document-text"
+    },
+    {
+      "name": "description",
+      "type": "string",
+      "label": "Description",
+      "placeholder": "Enter rule description",
+      "validation": "z.string().min(1).max(500)",
+      "required": true,
+      "icon": "heroicons-solid:document-text"
+    },
+    {
+      "name": "category",
+      "type": "string",
+      "label": "Category",
+      "placeholder": "Enter rule category (e.g., noise, parking)",
+      "validation": "z.string().min(1).max(50)",
+      "required": true,
+      "icon": "heroicons-solid:tag"
+    }
+  ],
+  "apiEndpoints": {
+    "getList": "/api/rules",
+    "createItem": "/api/rules",
+    "getItem": "/api/rules/{id}",
+    "updateItem": "/api/rules/{id}",
+    "deleteItem": "/api/rules/{id}"
+  },
+  "tagTypes": [
+    "rule_item",
+    "rules"
+  ]
+}

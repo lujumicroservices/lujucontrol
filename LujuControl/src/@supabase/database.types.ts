@@ -20,9 +20,9 @@ export type Database = {
           email: string
           end_date: string
           first_name: string
-          id: number
+          id: string
           last_name: string
-          membership_id: number | null
+          membership_id: string | null
           phone: string | null
           postal_code: string
           start_date: string
@@ -39,9 +39,9 @@ export type Database = {
           email: string
           end_date: string
           first_name: string
-          id?: number
+          id?: string
           last_name: string
-          membership_id?: number | null
+          membership_id?: string | null
           phone?: string | null
           postal_code: string
           start_date: string
@@ -58,13 +58,46 @@ export type Database = {
           email?: string
           end_date?: string
           first_name?: string
-          id?: number
+          id?: string
           last_name?: string
-          membership_id?: number | null
+          membership_id?: string | null
           phone?: string | null
           postal_code?: string
           start_date?: string
           state?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      membership_plans: {
+        Row: {
+          created_at: string | null
+          description: string | null
+          duration_days: number
+          id: string
+          is_active: boolean | null
+          name: string
+          price: number
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          description?: string | null
+          duration_days: number
+          id?: string
+          is_active?: boolean | null
+          name: string
+          price: number
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          description?: string | null
+          duration_days?: number
+          id?: string
+          is_active?: boolean | null
+          name?: string
+          price?: number
           updated_at?: string | null
         }
         Relationships: []
@@ -79,7 +112,7 @@ export type Database = {
           created_at: string | null
           email: string
           first_name: string
-          id: number
+          id: string
           last_name: string
           phone: string | null
           postal_code: string
@@ -97,7 +130,7 @@ export type Database = {
           created_at?: string | null
           email: string
           first_name: string
-          id?: number
+          id?: string
           last_name: string
           phone?: string | null
           postal_code: string
@@ -115,7 +148,7 @@ export type Database = {
           created_at?: string | null
           email?: string
           first_name?: string
-          id?: number
+          id?: string
           last_name?: string
           phone?: string | null
           postal_code?: string
@@ -136,7 +169,7 @@ export type Database = {
           created_at: string | null
           email: string
           first_name: string
-          id: number
+          id: string
           last_name: string
           password_hash: string
           phone: string | null
@@ -155,7 +188,7 @@ export type Database = {
           created_at?: string | null
           email: string
           first_name: string
-          id?: number
+          id?: string
           last_name: string
           password_hash: string
           phone?: string | null
@@ -174,7 +207,7 @@ export type Database = {
           created_at?: string | null
           email?: string
           first_name?: string
-          id?: number
+          id?: string
           last_name?: string
           password_hash?: string
           phone?: string | null

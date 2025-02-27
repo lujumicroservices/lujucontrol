@@ -13,16 +13,12 @@ import Avatar from '@mui/material/Avatar';
 import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
 import IconButton from '@mui/material/IconButton';
-import Autocomplete from '@mui/material/Autocomplete/Autocomplete';
-import Checkbox from '@mui/material/Checkbox/Checkbox';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { showMessage } from '@fuse/core/FuseMessage/fuseMessageSlice';
 import { useAppDispatch } from 'src/store/hooks';
 import useNavigate from '@fuse/hooks/useNavigate';
-import MembersEmailSelector from './email-selector/MembersEmailSelector';
-import PhoneNumberSelector from './phone-number-selector/PhoneNumberSelector';
 import {
 	useCreateMembersItemMutation,
 	useDeleteMembersItemMutation,
@@ -39,8 +35,6 @@ function BirthdayIcon() {
 function CalendarIcon() {
 	return <FuseSvgIcon size={20}>heroicons-solid:calendar-days</FuseSvgIcon>;
 }
-
-
 
 type FormType = Members;
 
@@ -61,7 +55,6 @@ const schema = z.object({
 	birthdate: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, 'Invalid date format'), // Date, not nullable
 	start_date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, 'Invalid date format'), // Date, not nullable
 	end_date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, 'Invalid date format'), // Date, not nullable
-
 });
 
 type MembersFormProps = {
@@ -80,7 +73,7 @@ function MembersForm(props: MembersFormProps) {
 	const { memberId } = routeParams;
 
 	const { data: member, isError } = useGetMembersItemQuery(memberId, {
-		skip: !memberId || memberId === 'new'
+		skip: !memberId || memberId === null
 	});
 
 	const [createMembers] = useCreateMembersItemMutation();
@@ -131,7 +124,7 @@ function MembersForm(props: MembersFormProps) {
 		});
 	}
 
-	const name = watch('first_name') + ' ' + watch('last_name');
+	const name = watch('first_name');
 
 	if (isError && !isNew) {
 		setTimeout(() => {
@@ -198,7 +191,6 @@ function MembersForm(props: MembersFormProps) {
 																}
 
 																const reader: FileReader = new FileReader();
-
 																reader.onload = () => {
 																	if (typeof reader.result === 'string') {
 																		resolve(
@@ -214,15 +206,12 @@ function MembersForm(props: MembersFormProps) {
 																		);
 																	}
 																};
-
 																reader.onerror = reject;
-
 																reader.readAsBinaryString(file);
 															});
 														}
 
 														const newImage = await readFileAsync();
-
 														onChange(newImage);
 													}}
 												/>
@@ -300,13 +289,13 @@ function MembersForm(props: MembersFormProps) {
 							InputProps={{
 								startAdornment: (
 									<InputAdornment position="start">
-										
+										<FuseSvgIcon size={20}>heroicons-solid:user-circle</FuseSvgIcon>
 									</InputAdornment>
 								)
 							}}
 						/>
 					)}
-				/>		
+				/>
 
 				<Controller
 					control={control}
@@ -473,8 +462,11 @@ function MembersForm(props: MembersFormProps) {
 						<DateTimePicker
 							value={new Date(value)}
 							onChange={(val) => {
-								onChange(val?.toISOString());  // Ensures ISO string format
+								// Extract the date part in YYYY-MM-DD format and pass it to onChange
+								const dateStr = val ? val.toISOString().split('T')[0] : '';  // '2025-02-01'
+								onChange(dateStr);
 							}}
+							format="yyyy-MM-dd"
 							className="mt-8 mb-4 w-full"
 							slotProps={{
 								textField: {
@@ -506,8 +498,11 @@ function MembersForm(props: MembersFormProps) {
 						<DateTimePicker
 							value={new Date(value)}
 							onChange={(val) => {
-								onChange(val?.toISOString());  // Ensures ISO string format
+								// Extract the date part in YYYY-MM-DD format and pass it to onChange
+								const dateStr = val ? val.toISOString().split('T')[0] : '';  // '2025-02-01'
+								onChange(dateStr);
 							}}
+							format="yyyy-MM-dd"
 							className="mt-8 mb-4 w-full"
 							slotProps={{
 								textField: {
@@ -539,8 +534,11 @@ function MembersForm(props: MembersFormProps) {
 						<DateTimePicker
 							value={new Date(value)}
 							onChange={(val) => {
-								onChange(val?.toISOString());  // Ensures ISO string format
+								// Extract the date part in YYYY-MM-DD format and pass it to onChange
+								const dateStr = val ? val.toISOString().split('T')[0] : '';  // '2025-02-01'
+								onChange(dateStr);
 							}}
+							format="yyyy-MM-dd"
 							className="mt-8 mb-4 w-full"
 							slotProps={{
 								textField: {

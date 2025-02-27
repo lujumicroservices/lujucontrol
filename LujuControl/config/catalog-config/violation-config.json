@@ -1,0 +1,53 @@
+{
+  "moduleName": "Violation",
+  "moduleNameLower": "violation",
+  "fields": [
+    {
+      "name": "property_id",
+      "type": "string",
+      "label": "Property ID",
+      "placeholder": "Enter property ID",
+      "validation": "z.string().min(1).max(50)",
+      "required": true,
+      "icon": "heroicons-solid:home"
+    },
+    {
+      "name": "violation_type",
+      "type": "string",
+      "label": "Violation Type",
+      "placeholder": "Enter violation type (e.g., noise, parking)",
+      "validation": "z.string().min(1).max(50)",
+      "required": true,
+      "icon": "heroicons-solid:exclamation-circle"
+    },
+    {
+      "name": "description",
+      "type": "string",
+      "label": "Description",
+      "placeholder": "Enter violation description",
+      "validation": "z.string().min(1).max(500)",
+      "required": true,
+      "icon": "heroicons-solid:document-text"
+    },
+    {
+      "name": "status",
+      "type": "string",
+      "label": "Status",
+      "placeholder": "Enter status (pending, resolved)",
+      "validation": "z.string().min(1).max(20)",
+      "required": true,
+      "icon": "heroicons-solid:check-circle"
+    }
+  ],
+  "apiEndpoints": {
+    "getList": "/api/violations",
+    "createItem": "/api/violations",
+    "getItem": "/api/violations/{id}",
+    "updateItem": "/api/violations/{id}",
+    "deleteItem": "/api/violations/{id}"
+  },
+  "tagTypes": [
+    "violation_item",
+    "violations"
+  ]
+}

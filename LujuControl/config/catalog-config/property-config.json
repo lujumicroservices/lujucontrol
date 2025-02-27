@@ -1,0 +1,62 @@
+{
+  "moduleName": "Property",
+  "moduleNameLower": "property",
+  "fields": [
+    {
+      "name": "address",
+      "type": "string",
+      "label": "Address",
+      "placeholder": "Enter property address",
+      "validation": "z.string().min(1).max(255)",
+      "required": true,
+      "icon": "heroicons-solid:home"
+    },
+    {
+      "name": "unit_number",
+      "type": "string",
+      "label": "Unit Number",
+      "placeholder": "Enter unit number",
+      "validation": "z.string().min(1).max(20)",
+      "required": true,
+      "icon": "heroicons-solid:hashtag"
+    },
+    {
+      "name": "size",
+      "type": "number",
+      "label": "Size (sq. ft.)",
+      "placeholder": "Enter property size",
+      "validation": "z.number().min(0)",
+      "required": true,
+      "icon": "heroicons-solid:ruler"
+    },
+    {
+      "name": "type",
+      "type": "string",
+      "label": "Property Type",
+      "placeholder": "Enter property type (e.g., apartment, house)",
+      "validation": "z.string().min(1).max(50)",
+      "required": true,
+      "icon": "heroicons-solid:building"
+    },
+    {
+      "name": "owner_id",
+      "type": "string",
+      "label": "Owner ID",
+      "placeholder": "Enter owner ID",
+      "validation": "z.string().min(1).max(50)",
+      "required": true,
+      "icon": "heroicons-solid:user"
+    }
+  ],
+  "apiEndpoints": {
+    "getList": "/api/properties",
+    "createItem": "/api/properties",
+    "getItem": "/api/properties/{id}",
+    "updateItem": "/api/properties/{id}",
+    "deleteItem": "/api/properties/{id}"
+  },
+  "tagTypes": [
+    "property_item",
+    "properties"
+  ]
+}

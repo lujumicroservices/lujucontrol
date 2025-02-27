@@ -1,0 +1,53 @@
+{
+  "moduleName": "Maintenance",
+  "moduleNameLower": "maintenance",
+  "fields": [
+    {
+      "name": "property_id",
+      "type": "string",
+      "label": "Property ID",
+      "placeholder": "Enter property ID",
+      "validation": "z.string().min(1).max(50)",
+      "required": true,
+      "icon": "heroicons-solid:home"
+    },
+    {
+      "name": "issue_type",
+      "type": "string",
+      "label": "Issue Type",
+      "placeholder": "Enter issue type (e.g., plumbing, electrical)",
+      "validation": "z.string().min(1).max(50)",
+      "required": true,
+      "icon": "heroicons-solid:wrench"
+    },
+    {
+      "name": "description",
+      "type": "string",
+      "label": "Description",
+      "placeholder": "Enter issue description",
+      "validation": "z.string().min(1).max(500)",
+      "required": true,
+      "icon": "heroicons-solid:document-text"
+    },
+    {
+      "name": "status",
+      "type": "string",
+      "label": "Status",
+      "placeholder": "Enter status (pending, in progress, resolved)",
+      "validation": "z.string().min(1).max(20)",
+      "required": true,
+      "icon": "heroicons-solid:check-circle"
+    }
+  ],
+  "apiEndpoints": {
+    "getList": "/api/maintenance",
+    "createItem": "/api/maintenance",
+    "getItem": "/api/maintenance/{id}",
+    "updateItem": "/api/maintenance/{id}",
+    "deleteItem": "/api/maintenance/{id}"
+  },
+  "tagTypes": [
+    "maintenance_item",
+    "maintenance"
+  ]
+}

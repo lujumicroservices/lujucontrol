@@ -1,3 +1,5 @@
-import StaffPage from './StaffPage';
+function StaffPage() {
+	return null;
+}
 
 export default StaffPage;
