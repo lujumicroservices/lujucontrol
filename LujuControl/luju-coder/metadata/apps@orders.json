@@ -1,0 +1,219 @@
+[
+  {
+    "type": "file",
+    "name": "Orders.tsx",
+    "path": "/Users/juanvaldes/LuJu/LuJuMain/LujuControl/src/app/(control-panel)/apps/orders/Orders.tsx",
+    "size": 459,
+    "lastModified": "2025-01-26T00:52:34.000Z",
+    "summary": "",
+    "keyElements": [],
+    "concepts": [],
+    "dependencies": []
+  },
+  {
+    "type": "file",
+    "name": "OrdersHeader.tsx",
+    "path": "/Users/juanvaldes/LuJu/LuJuMain/LujuControl/src/app/(control-panel)/apps/orders/OrdersHeader.tsx",
+    "size": 758,
+    "lastModified": "2025-01-26T00:52:34.000Z",
+    "summary": "",
+    "keyElements": [
+      "- **OrdersHeader (Function)**: The primary React function component that returns the JSX for the Orders header."
+    ],
+    "concepts": [
+      "- **React Functional Components**: The file uses React functional components for defining UI pieces."
+    ],
+    "dependencies": []
+  },
+  {
+    "type": "file",
+    "name": "OrdersStatus.tsx",
+    "path": "/Users/juanvaldes/LuJu/LuJuMain/LujuControl/src/app/(control-panel)/apps/orders/OrdersStatus.tsx",
+    "size": 521,
+    "lastModified": "2025-01-26T00:52:34.000Z",
+    "summary": "",
+    "keyElements": [],
+    "concepts": [],
+    "dependencies": []
+  },
+  {
+    "type": "file",
+    "name": "OrdersTable.tsx",
+    "path": "/Users/juanvaldes/LuJu/LuJuMain/LujuControl/src/app/(control-panel)/apps/orders/OrdersTable.tsx",
+    "size": 3329,
+    "lastModified": "2025-01-26T00:52:34.000Z",
+    "summary": "",
+    "keyElements": [],
+    "concepts": [],
+    "dependencies": []
+  },
+  {
+    "type": "file",
+    "name": "OrdersTableHead.tsx",
+    "path": "/Users/juanvaldes/LuJu/LuJuMain/LujuControl/src/app/(control-panel)/apps/orders/OrdersTableHead.tsx",
+    "size": 5697,
+    "lastModified": "2025-01-26T00:52:34.000Z",
+    "summary": "",
+    "keyElements": [],
+    "concepts": [],
+    "dependencies": []
+  },
+  {
+    "type": "directory",
+    "name": "[orderId]",
+    "path": "/Users/juanvaldes/LuJu/LuJuMain/LujuControl/src/app/(control-panel)/apps/orders/[orderId]",
+    "children": [
+      {
+        "type": "file",
+        "name": "Order.tsx",
+        "path": "/Users/juanvaldes/LuJu/LuJuMain/LujuControl/src/app/(control-panel)/apps/orders/[orderId]/Order.tsx",
+        "size": 3416,
+        "lastModified": "2025-01-26T00:52:34.000Z",
+        "summary": "",
+        "keyElements": [],
+        "concepts": [],
+        "dependencies": []
+      },
+      {
+        "type": "file",
+        "name": "page.tsx",
+        "path": "/Users/juanvaldes/LuJu/LuJuMain/LujuControl/src/app/(control-panel)/apps/orders/[orderId]/page.tsx",
+        "size": 52,
+        "lastModified": "2025-01-26T00:52:34.000Z",
+        "summary": "",
+        "keyElements": [],
+        "concepts": [],
+        "dependencies": []
+      },
+      {
+        "type": "directory",
+        "name": "tabs",
+        "path": "/Users/juanvaldes/LuJu/LuJuMain/LujuControl/src/app/(control-panel)/apps/orders/[orderId]/tabs",
+        "children": [
+          {
+            "type": "directory",
+            "name": "details",
+            "path": "/Users/juanvaldes/LuJu/LuJuMain/LujuControl/src/app/(control-panel)/apps/orders/[orderId]/tabs/details",
+            "children": [
+              {
+                "type": "file",
+                "name": "DetailsTab.tsx",
+                "path": "/Users/juanvaldes/LuJu/LuJuMain/LujuControl/src/app/(control-panel)/apps/orders/[orderId]/tabs/details/DetailsTab.tsx",
+                "size": 8846,
+                "lastModified": "2025-01-26T00:52:34.000Z",
+                "summary": "",
+                "keyElements": [
+                  "**"
+                ],
+                "concepts": [
+                  "**"
+                ],
+                "dependencies": []
+              },
+              {
+                "type": "file",
+                "name": "GoogleAddressMap.tsx",
+                "path": "/Users/juanvaldes/LuJu/LuJuMain/LujuControl/src/app/(control-panel)/apps/orders/[orderId]/tabs/details/GoogleAddressMap.tsx",
+                "size": 630,
+                "lastModified": "2025-01-26T00:52:34.000Z",
+                "summary": "",
+                "keyElements": [],
+                "concepts": [],
+                "dependencies": []
+              }
+            ]
+          },
+          {
+            "type": "directory",
+            "name": "invoice",
+            "path": "/Users/juanvaldes/LuJu/LuJuMain/LujuControl/src/app/(control-panel)/apps/orders/[orderId]/tabs/invoice",
+            "children": [
+              {
+                "type": "file",
+                "name": "InvoiceTab.tsx",
+                "path": "/Users/juanvaldes/LuJu/LuJuMain/LujuControl/src/app/(control-panel)/apps/orders/[orderId]/tabs/invoice/InvoiceTab.tsx",
+                "size": 7991,
+                "lastModified": "2025-01-26T00:52:34.000Z",
+                "summary": "",
+                "keyElements": [],
+                "concepts": [],
+                "dependencies": []
+              }
+            ]
+          },
+          {
+            "type": "directory",
+            "name": "products",
+            "path": "/Users/juanvaldes/LuJu/LuJuMain/LujuControl/src/app/(control-panel)/apps/orders/[orderId]/tabs/products",
+            "children": [
+              {
+                "type": "file",
+                "name": "ProductsTab.tsx",
+                "path": "/Users/juanvaldes/LuJu/LuJuMain/LujuControl/src/app/(control-panel)/apps/orders/[orderId]/tabs/products/ProductsTab.tsx",
+                "size": 1938,
+                "lastModified": "2025-01-26T00:52:34.000Z",
+                "summary": "",
+                "keyElements": [],
+                "concepts": [],
+                "dependencies": []
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "directory",
+    "name": "constants",
+    "path": "/Users/juanvaldes/LuJu/LuJuMain/LujuControl/src/app/(control-panel)/apps/orders/constants",
+    "children": [
+      {
+        "type": "file",
+        "name": "orderStatuses.ts",
+        "path": "/Users/juanvaldes/LuJu/LuJuMain/LujuControl/src/app/(control-panel)/apps/orders/constants/orderStatuses.ts",
+        "size": 1327,
+        "lastModified": "2025-01-26T00:52:34.000Z",
+        "summary": "",
+        "keyElements": [],
+        "concepts": [],
+        "dependencies": []
+      }
+    ]
+  },
+  {
+    "type": "directory",
+    "name": "models",
+    "path": "/Users/juanvaldes/LuJu/LuJuMain/LujuControl/src/app/(control-panel)/apps/orders/models",
+    "children": [
+      {
+        "type": "file",
+        "name": "OrderModel.ts",
+        "path": "/Users/juanvaldes/LuJu/LuJuMain/LujuControl/src/app/(control-panel)/apps/orders/models/OrderModel.ts",
+        "size": 802,
+        "lastModified": "2025-01-26T00:52:34.000Z",
+        "summary": "",
+        "keyElements": [],
+        "concepts": [],
+        "dependencies": []
+      }
+    ]
+  },
+  {
+    "type": "file",
+    "name": "page.tsx",
+    "path": "/Users/juanvaldes/LuJu/LuJuMain/LujuControl/src/app/(control-panel)/apps/orders/page.tsx",
+    "size": 55,
+    "lastModified": "2025-01-26T00:52:34.000Z",
+    "summary": "",
+    "keyElements": [
+      "**"
+    ],
+    "concepts": [
+      "**"
+    ],
+    "dependencies": [
+      "**"
+    ]
+  }
+]

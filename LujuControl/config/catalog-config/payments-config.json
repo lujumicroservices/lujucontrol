@@ -1,0 +1,121 @@
+{
+  "moduleName": "PaymentTransaction",
+  "moduleNameLower": "payment_transaction",
+  "groupField": "amount",
+  "displayFieldName": true,
+  "backgroundImage": "finance.jpeg",
+  "listdisplayFields": ["player_id", "amount", "billing_period", "due_date", "status"],
+  "fields": [
+    {
+      "name": "player_id",
+      "label": "Player ID",
+      "placeholder": "Enter player ID",
+      "type": "string",
+      "validation": "z.string().min(1).max(50)",
+      "required": true,
+      "icon": "heroicons-solid:user",
+      "group": "general",
+      "display": true
+    },
+    {
+      "name": "amount",
+      "label": "Amount",
+      "placeholder": "Enter transaction amount",
+      "type": "number",
+      "validation": "z.number().min(0)",
+      "required": true,
+      "icon": "heroicons-solid:currency-dollar",
+      "group": "general",
+      "display": true
+    },
+    {
+      "name": "billing_period",
+      "label": "Billing Period",
+      "placeholder": "YYYY-MM",
+      "type": "string",
+      "validation": "z.string().regex(/\\d{4}-\\d{2}/)",
+      "required": true,
+      "icon": "heroicons-solid:calendar",
+      "group": "general",
+      "display": true
+    },
+    {
+      "name": "due_date",
+      "label": "Due Date",
+      "placeholder": "YYYY-MM-DD",
+      "type": "string",
+      "validation": "z.string().regex(/\\d{4}-\\d{2}-\\d{2}/)",
+      "required": true,
+      "icon": "heroicons-solid:calendar",
+      "group": "general",
+      "display": true
+    },
+    {
+      "name": "payment_date",
+      "label": "Payment Date",
+      "placeholder": "YYYY-MM-DD",
+      "type": "string",
+      "validation": "z.string().regex(/\\d{4}-\\d{2}-\\d{2}/)",
+      "required": false,
+      "icon": "heroicons-solid:calendar",
+      "group": "payment",
+      "display": false
+    },
+    {
+      "name": "status",
+      "label": "Status",
+      "placeholder": "Enter status",
+      "type": "select",
+      "validation": "z.enum(['pending', 'completed', 'failed'])",
+      "required": true,
+      "icon": "heroicons-solid:check-circle",
+      "options": ["pending", "completed", "failed"],
+      "group": "general",
+      "display": true
+    },
+    {
+      "name": "late_fee",
+      "label": "Late Fee",
+      "placeholder": "Enter late fee amount",
+      "type": "number",
+      "validation": "z.number().min(0)",
+      "required": false,
+      "icon": "heroicons-solid:currency-dollar",
+      "group": "payment",
+      "display": true
+    },
+    {
+      "name": "created_at",
+      "label": "Created At",
+      "placeholder": "YYYY-MM-DD",
+      "type": "date",
+      "validation": "z.string().regex(/\\d{4}-\\d{2}-\\d{2}/)",
+      "required": false,
+      "icon": "heroicons-solid:clock",
+      "group": "timestamps",
+      "display": false
+    },
+    {
+      "name": "updated_at",
+      "label": "Updated At",
+      "placeholder": "YYYY-MM-DD",
+      "type": "date",
+      "validation": "z.string().regex(/\\d{4}-\\d{2}-\\d{2}/)",
+      "required": false,
+      "icon": "heroicons-solid:clock",
+      "group": "timestamps",
+      "display": false
+    }
+  ],
+  "apiEndpoints": {
+    "getList": "/api/payment-transactions",
+    "createItem": "/api/payment-transactions",
+    "getItem": "/api/payment-transactions/{id}",
+    "updateItem": "/api/payment-transactions/{id}",
+    "deleteItem": "/api/payment-transactions/{id}"
+  },
+  "tagTypes": [
+    "payment_transaction_item",
+    "payment_transactions"
+  ]
+}

@@ -114,7 +114,7 @@ function NavbarStyle3Content(props: NavbarStyle3ContentProps) {
 				>
 					<img
 						className="my-8 w-11"
-						src="/assets/images/logo/logo.svg"
+						src="/assets/images/logo/futball_logo_small.png"
 						alt="logo"
 					/>
 

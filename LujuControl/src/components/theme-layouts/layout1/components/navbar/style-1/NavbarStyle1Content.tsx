@@ -6,7 +6,6 @@ import Navigation from 'src/components/theme-layouts/components/navigation/Navig
 import UserMenu from 'src/components/theme-layouts/components/UserMenu';
 import { Divider } from '@mui/material';
 import Logo from '../../../../components/Logo';
-import GoToDocBox from '@/components/theme-layouts/components/GoToDocBox';
 
 const Root = styled('div')(({ theme }) => ({
 	backgroundColor: theme.palette.background.default,
@@ -60,14 +59,13 @@ function NavbarStyle1Content(props: NavbarStyle1ContentProps) {
 				<div className="shrink-0 flex items-center justify-center py-12 opacity-10">
 					<img
 						className="w-full max-w-16"
-						src="/assets/images/logo/logo.svg"
+						src="/assets/images/logo/futball_logo_small.png"
 						alt="footer logo"
 					/>
 				</div>
 			</StyledContent>
 
-			<GoToDocBox className="mx-3 my-4" />
-
+		
 			<Divider />
 
 			<div className="p-1 md:p-4 w-full">

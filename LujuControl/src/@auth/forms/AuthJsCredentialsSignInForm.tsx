@@ -46,7 +46,7 @@ function AuthJsCredentialsSignInForm() {
 	const { isValid, dirtyFields, errors } = formState;
 
 	useEffect(() => {
-		setValue('email', 'admin@fusetheme.com', {
+		setValue('email', 'jvaldes.garcia@gmail.com', {
 			shouldDirty: true,
 			shouldValidate: true
 		});

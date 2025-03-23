@@ -1,0 +1,119 @@
+{
+  "moduleName": "Player",
+  "moduleNameLower": "player",
+  "groupField": "first_name",
+  "displayFieldName": true,
+  "backgroundImage": "soccer.jpeg",
+  "listdisplayFields": ["first_name", "last_name", "jersey_number"],
+  "fields": [
+    {
+      "name": "first_name",
+      "label": "First Name",
+      "placeholder": "Enter player's first name",
+      "type": "string",
+      "validation": "z.string().min(1).max(50)",
+      "required": true,
+      "icon": "heroicons-solid:user",
+      "group": "general",
+      "display": true
+    },
+    {
+      "name": "last_name",
+      "label": "Last Name",
+      "placeholder": "Enter player's last name",
+      "type": "string",
+      "validation": "z.string().min(1).max(50)",
+      "required": true,
+      "icon": "heroicons-solid:user",
+      "group": "general",
+      "display": true
+    },
+    {
+      "name": "birth_date",
+      "label": "Date of Birth",
+      "placeholder": "YYYY-MM-DD",
+      "type": "date",
+      "validation": "z.string().regex(/\\d{4}-\\d{2}-\\d{2}/)",
+      "required": true,
+      "icon": "heroicons-solid:calendar",
+      "group": "general",
+      "display": true
+    },
+    {
+      "name": "jersey_number",
+      "label": "Jersey Number",
+      "placeholder": "Enter jersey number",
+      "type": "number",
+      "validation": "z.number().int().min(0).max(99)",
+      "required": true,
+      "icon": "heroicons-solid:hashtag",
+      "group": "general",
+      "display": true
+    },
+    {
+      "name": "position",
+      "label": "Position",
+      "placeholder": "Select position",
+      "type": "select",
+      "validation": "z.enum(['Goalkeeper', 'Defender', 'Midfielder', 'Forward'])",
+      "required": true,
+      "icon": "heroicons-solid:view-grid",
+      "options": ["Goalkeeper", "Defender", "Midfielder", "Forward"],
+      "group": "general",
+      "display": true
+    },
+    {
+      "name": "team_name",
+      "label": "Team Name",
+      "placeholder": "Enter team name",
+      "type": "string",
+      "validation": "z.string().min(1).max(100)",
+      "required": true,
+      "icon": "heroicons-solid:flag",
+      "group": "general",
+      "display": true
+    },
+    {
+      "name": "medical_conditions",
+      "label": "Medical Conditions",
+      "placeholder": "List any medical conditions",
+      "type": "string",
+      "validation": "z.string().max(500).optional()",
+      "required": false,
+      "icon": "heroicons-solid:heart",
+      "group": "medical",
+      "display": true
+    },{
+      "name": "created_at",
+      "label": "created at",
+      "placeholder": "YYYY-MM-DD",
+      "type": "date",
+      "validation": "z.string().regex(/\\d{4}-\\d{2}-\\d{2}/)",
+      "required": false,
+      "icon": "heroicons-solid:heart",
+      "group": "general",
+			"display": false
+    },{
+      "name": "updated_at",
+      "label": "updated at",
+      "placeholder": "YYYY-MM-DD",
+      "type": "date",
+      "validation": "z.string().regex(/\\d{4}-\\d{2}-\\d{2}/)",
+      "required": false,
+      "icon": "heroicons-solid:heart",
+      "group": "general",
+			"display": false
+    }
+  ],
+  "apiEndpoints": {
+    "getList": "/api/players",
+    "createItem": "/api/players",
+    "getItem": "/api/players/{id}",
+    "updateItem": "/api/players/{id}",
+    "deleteItem": "/api/players/{id}"
+  },
+  "tagTypes": [
+    "player_item",
+    "players"
+  ]
+}

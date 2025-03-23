@@ -1,6 +1,7 @@
 {
   "moduleName": "Violation",
   "moduleNameLower": "violation",
+	"groupField": "violation_type",
   "fields": [
     {
       "name": "property_id",

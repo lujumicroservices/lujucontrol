@@ -1,6 +1,7 @@
 {
   "moduleName": "Rule",
   "moduleNameLower": "rule",
+	"groupField": "title",
   "fields": [
     {
       "name": "title",

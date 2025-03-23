@@ -12,7 +12,7 @@ function SignOutPage() {
 				<div className="flex flex-col items-center mx-auto w-full max-w-80 sm:mx-0 sm:w-80">
 					<img
 						className="mx-auto w-12"
-						src="/assets/images/logo/logo.svg"
+						src="/assets/images/logo/futball_logo_small.png"
 						alt="logo"
 					/>
 

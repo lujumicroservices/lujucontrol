@@ -1,0 +1,106 @@
+{
+  "moduleName": "Settings",
+  "moduleNameLower": "settings",
+  "groupField": "description",
+  "displayFieldName": true,
+  "backgroundImage": "settings.jpeg",
+  "listdisplayFields": ["description", "monthly_cost"],
+  "fields": [
+		{
+      "name": "description",
+      "label": "Description",
+      "placeholder": "Enter a description",
+      "type": "string",
+      "validation": "z.string().min(1).max(50)",
+      "required": true,
+      "group": "payments",
+      "display": true
+    },
+    {
+      "name": "monthly_cost",
+      "label": "Monthly Cost",
+      "placeholder": "Enter the monthly fee",
+      "type": "number",
+      "validation": "z.number().min(0).max(10000)",
+      "required": true,
+      "icon": "heroicons-solid:currency-dollar",
+      "group": "payments",
+      "display": true
+    },
+    {
+      "name": "annual_cost",
+      "label": "Annual Cost",
+      "placeholder": "Enter the annual fee",
+      "type": "number",
+      "validation": "z.number().min(0).max(100000)",
+      "required": true,
+      "icon": "heroicons-solid:currency-dollar",
+      "group": "payments",
+      "display": true
+    },
+    {
+      "name": "default_payment_due_day",
+      "label": "Default Payment Due Day",
+      "placeholder": "Enter the default due day",
+      "type": "number",
+      "validation": "z.number().int().min(1).max(31)",
+      "required": true,
+      "icon": "heroicons-solid:calendar",
+      "group": "payments",
+      "display": true
+    },
+    {
+      "name": "max_late_days",
+      "label": "Max Late Payment Days",
+      "placeholder": "Enter the max late days before penalty",
+      "type": "number",
+      "validation": "z.number().int().min(0).max(60)",
+      "required": true,
+      "icon": "heroicons-solid:clock",
+      "group": "payments",
+      "display": true
+    },
+    {
+      "name": "late_fee_percentage",
+      "label": "Late Fee Percentage",
+      "placeholder": "Enter the late fee percentage",
+      "type": "number",
+      "validation": "z.number().min(0).max(100)",
+      "required": false,
+      "icon": "heroicons-solid:percent",
+      "group": "payments",
+      "display": true
+    },{
+      "name": "created_at",
+      "label": "created at",
+      "placeholder": "YYYY-MM-DD",
+      "type": "date",
+      "validation": "z.string().regex(/\\d{4}-\\d{2}-\\d{2}/)",
+      "required": false,
+      "icon": "heroicons-solid:heart",
+      "group": "general",
+			"display": false
+    },{
+      "name": "updated_at",
+      "label": "updated at",
+      "placeholder": "YYYY-MM-DD",
+      "type": "date",
+      "validation": "z.string().regex(/\\d{4}-\\d{2}-\\d{2}/)",
+      "required": false,
+      "icon": "heroicons-solid:heart",
+      "group": "general",
+			"display": false
+    }
+  ],
+  "apiEndpoints": {
+    "getList": "/api/settings",
+    "createItem": "/api/settings",
+    "getItem": "/api/settings/{id}",
+    "updateItem": "/api/settings/{id}",
+    "deleteItem": "/api/settings/{id}"
+  },
+  "tagTypes": [
+    "settings_item",
+    "settings"
+  ]
+}

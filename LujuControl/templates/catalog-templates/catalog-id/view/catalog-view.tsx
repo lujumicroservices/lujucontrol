@@ -9,19 +9,21 @@ import Typography from '@mui/material/Typography';
 import Chip from '@mui/material/Chip';
 import Divider from '@mui/material/Divider';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
+import InputAdornment from '@mui/material/InputAdornment';
 import Box from '@mui/system/Box';
 import _ from 'lodash';
+import TextField from '@mui/material/TextField';
 import { showMessage } from '@fuse/core/FuseMessage/fuseMessageSlice';
 import { useAppDispatch } from 'src/store/hooks';
 import useNavigate from '@fuse/hooks/useNavigate';
 import { useGet{{moduleName}}ItemQuery, useGet{{moduleName}}CountriesQuery } from '../../{{moduleName}}Api';
-import FieldDisplay from './FieldDisplay'; // Reusable component for displaying fields
+
 
 /**
  * The {{moduleNameLower}} view.
  */
 function {{moduleName}}View() {
-	const { data: countries } = useGet{{moduleName}}CountriesQuery({});
+	
 
 	const routeParams = useParams<{ {{moduleNameLower}}Id: string }>();
 	const { {{moduleNameLower}}Id } = routeParams;
@@ -36,9 +38,7 @@ function {{moduleName}}View() {
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
 
-	function getCountryByIso(iso: string) {
-		return countries?.find((country) => country.iso === iso);
-	}
+	
 
 	if (isLoading) {
 		return <FuseLoading className="min-h-screen" />;
@@ -67,7 +67,7 @@ function {{moduleName}}View() {
 			>
 				<img
 					className="absolute inset-0 object-cover w-full h-full"
-					src="/assets/images/cards/default-bk.jpg"
+					src="/assets/images/cards/{{backgroundImage}}"
 					alt="user background"
 				/>
 			</Box>
@@ -85,9 +85,9 @@ function {{moduleName}}View() {
 							}}
 							className="w-32 h-32 text-16 font-bold"
 							src={ {{moduleNameLower}}.avatar}
-							alt={ {{moduleNameLower}}.first_name}
+							alt={ {{moduleNameLower}}.name}
 						>
-							{ {{moduleNameLower}}?.first_name?.charAt(0)}
+							{ {{moduleNameLower}}?.name?.charAt(0)}
 						</Avatar>
 						<div className="flex items-center ml-auto mb-1">
 							<Button
@@ -102,7 +102,7 @@ function {{moduleName}}View() {
 						</div>
 					</div>
 
-					<Typography className="mt-3 text-4xl font-bold truncate">{ {{moduleNameLower}}.first_name}</Typography>
+					<Typography className="mt-3 text-4xl font-bold truncate">{ {{moduleNameLower}}.name}</Typography>
 
 					<div className="flex flex-wrap items-center mt-2">
 						{ {{moduleNameLower}}?.tags?.map((id) => (
@@ -118,22 +118,41 @@ function {{moduleName}}View() {
 					<Divider className="mt-4 mb-6" />
 
 					<div className="flex flex-col space-y-8">
-						{{#fields}}
-						<FieldDisplay
-							icon="{{icon}}"
-							value={ {{moduleNameLower}}.{{name}} }
-							format="{{format}}"
-							isEmail={{isEmail}}
-							isLink={{isLink}}
-							concatenate= {{#concatenate}}
-							[
-								{{#concatenate}}
-									{{moduleNameLower}}.{{.}}{{#unless @last}}, {{/unless}}
-								{{/concatenate}}
-							]
-							{{/concatenate}}
-						/>
-						{{/fields}}
+
+					{{#each (groupFields fields)}}
+							<div className="field-group">
+								<Typography variant="h6" sx=\{{ 
+										fontWeight: 'bold', mb: 2 
+									}}
+								>
+									<FuseSvgIcon size={20} className="mr-2">heroicons-outline:collection</FuseSvgIcon>
+									{{@key}}
+								</Typography>
+								<Divider className="mb-4" />
+								<div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+									{{#each this}}
+									{{#if display}}
+										<TextField
+											label="{{this.label}}"
+											value={ {{@root.moduleNameLower}}.{{this.name}} }
+											variant="outlined"
+											fullWidth
+											disabled
+											InputProps=\{{
+												readOnly: true,
+												startAdornment: (
+													<InputAdornment position="start">
+														<FuseSvgIcon size={20}>{{icon}}</FuseSvgIcon>
+													</InputAdornment>
+												)
+											}}
+										/>
+										{{/if}}
+									{{/each}}
+								</div>
+							</div>
+				  {{/each}}
+				
 					</div>
 				</div>
 			</div>

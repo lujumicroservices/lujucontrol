@@ -35,7 +35,7 @@ export const providers: Provider[] = [
 			 * Sign in
 			 */
 			if (formInput.formType === 'signin') {
-				if (formInput.password === '' || formInput.email !== 'admin@fusetheme.com') {
+				if (formInput.password === '' || formInput.email !== 'jvaldes.garcia@gmail.com') {
 					return null;
 				}
 			}
@@ -62,7 +62,7 @@ export const providers: Provider[] = [
 ];
 
 const config = {
-	theme: { logo: '/assets/images/logo/logo.svg' },
+	theme: { logo: '/assets/images/logo/futball_logo_small.png' },
 	adapter: UnstorageAdapter(storage),
 	pages: {
 		signIn: '/sign-in'

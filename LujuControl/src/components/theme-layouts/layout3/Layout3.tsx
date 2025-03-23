@@ -69,9 +69,7 @@ function Layout3(props: Layout3Props) {
 						/>
 					)}
 
-					<div className="sticky top-0 z-99">
-						<Configurator />
-					</div>
+		
 
 					<div className="relative z-10 flex min-h-0 flex-auto flex-col">
 						<FuseDialog />

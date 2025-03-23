@@ -27,24 +27,23 @@ function {{moduleName}}ListItem(props: {{moduleName}}ListItemPropsType) {
 			>
 				<ListItemAvatar>
 					<Avatar
-						alt={ {{moduleNameLower}}.first_name}
-						src={ {{moduleNameLower}}.avatar}
+						alt={ {{moduleNameLower}}.{{groupField}} }
+						{{#if avatarField}} src={ {{moduleNameLower}}.{{avatarField}} } {{/if}}												
 					/>
 				</ListItemAvatar>
 				<ListItemText
 					classes=\{{ root: 'm-0', primary: 'font-medium leading-5 truncate' }}
-					primary={ {{moduleNameLower}}.first_name}
+					primary={ {{moduleNameLower}}.{{groupField}} }
 					secondary={
 						<Typography
 							className="inline"
 							component="span"
 							variant="body2"
-							color="text.secondary"
-						>
-							{ {{moduleNameLower}}.membership_id}
+							color="text.secondary">
+							{{#each listdisplayFields}}{{#if @index}},{{/if}}{ {{../moduleNameLower}}.{{this}} }{{/each}}										    
 						</Typography>
 					}
-				/>
+				/>				
 			</ListItemButton>
 			<Divider />
 		</>

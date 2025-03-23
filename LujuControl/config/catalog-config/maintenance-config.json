@@ -1,6 +1,7 @@
 {
   "moduleName": "Maintenance",
   "moduleNameLower": "maintenance",
+	"groupField": "issue_type",
   "fields": [
     {
       "name": "property_id",

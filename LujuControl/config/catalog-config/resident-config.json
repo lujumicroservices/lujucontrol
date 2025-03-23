@@ -1,6 +1,7 @@
 {
   "moduleName": "Resident",
   "moduleNameLower": "resident",
+	"groupField": "first_name",
   "fields": [
     {
       "name": "first_name",

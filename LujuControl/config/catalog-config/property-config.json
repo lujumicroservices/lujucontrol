@@ -1,6 +1,7 @@
 {
   "moduleName": "Property",
   "moduleNameLower": "property",
+	"groupField": "address",
   "fields": [
     {
       "name": "address",

@@ -8,7 +8,7 @@ import Box from '@mui/material/Box';
 import { useAppDispatch, useAppSelector } from 'src/store/hooks';
 import { ChangeEvent, useEffect } from 'react';
 import PageBreadcrumb from 'src/components/PageBreadcrumb';
-import { setSearchText, resetSearchText, selectSearchText } from './AppSlice.template';
+import { setSearchText, resetSearchText, selectSearchText } from './{{moduleNameLower}}AppSlice';
 import { selectFiltered{{moduleName}}List, useGet{{moduleName}}ListQuery } from './{{moduleName}}Api';
 
 /**

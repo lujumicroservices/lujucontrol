@@ -78,24 +78,12 @@ export type Create{{moduleName}}ItemApiArg = {
 };
 
 export type {{moduleName}} = {
+	id: string;
   {{#fields}}
   {{name}}: {{type}};
   {{/fields}}
 };
 
-// Utility function for derived/composed fields
-export const get{{moduleName}}DisplayData = ({{moduleNameLower}}Data: {{moduleName}}) => ({
-  fullName: `${ {{moduleNameLower}}Data.first_name} ${ {{moduleNameLower}}Data.last_name}`,
-  fullAddress: `${ {{moduleNameLower}}Data.address_line_1}, ${ {{moduleNameLower}}Data.address_line_2 ? {{moduleNameLower}}Data.address_line_2 + ", " : ""}${ {{moduleNameLower}}Data.city}, ${ {{moduleNameLower}}Data.state}, ${ {{moduleNameLower}}Data.country} - ${ {{moduleNameLower}}Data.postal_code}`,
-});
-
-export type Country = {
-  id?: string;
-  title?: string;
-  iso?: string;
-  code?: string;
-  flagImagePos?: string;
-};
 
 export type Grouped{{moduleName}} = {
   group: string;
@@ -148,7 +136,7 @@ export const selectGroupedFiltered{{moduleName}} = ({{moduleNameLower}}: {{modul
 
     const groupedObject: Record<string, Grouped{{moduleName}}> = sorted{{moduleName}}?.reduce<AccumulatorType>((r, e) => {
       // get first letter of name of current element
-      const group = e.first_name[0];
+      const group = e.{{groupField}}[0];
 
       // if there is no property in accumulator with this letter create it
       if (!r[group]) r[group] = { group, children: [e] };

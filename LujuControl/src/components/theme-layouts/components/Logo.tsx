@@ -26,11 +26,11 @@ function Logo() {
 			<div className="flex flex-1 items-center space-x-2 px-2.5">
 				<img
 					className="logo-icon h-8 w-8"
-					src="/assets/images/logo/logo.svg"
+					src="/assets/images/logo/futball_logo_small.png"
 					alt="logo"
 				/>
 				<div className="logo-text flex flex-col flex-auto gap-0.5">
-					<Typography className="text-2xl tracking-light font-semibold leading-none">FUSE</Typography>
+					<Typography className="text-2xl tracking-light font-semibold leading-none">San</Typography>
 					<Typography
 						className="text-[13.6px] tracking-light font-semibold leading-none"
 						color="primary"
@@ -38,11 +38,11 @@ function Logo() {
 							color: '#82d7f7'
 						}}
 					>
-						REACT
+						Ignacio
 					</Typography>
 				</div>
 			</div>
-			<MainProjectSelection />
+			
 		</Root>
 	);
 }

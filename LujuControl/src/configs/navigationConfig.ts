@@ -23,82 +23,28 @@ const navigationConfig: FuseNavItemType[] = [
 		url: '/dashboard',
 	},
 	{
-		id: 'members',
-		title: 'Members',
-		translate: 'MEMBERS',
+		id: 'users',
+		title: 'Users',
+		translate: 'USERS',
 		type: 'item',
 		icon: 'heroicons-outline:user-group',
-		url: '/members'
+		url: '/users'
 	},
 	{
-		id: 'staff',
-		title: 'Staff',
-		translate: 'STAFF',
+		id: 'player',
+		title: 'Players',
+		translate: 'PLAYERS',
 		type: 'item',
-		icon: 'heroicons-outline:briefcase',
-		url: '/staff'
+		icon: 'heroicons-outline:user-group',
+		url: '/player'
 	},
 	{
-		id: 'membershipplans',
-		title: 'Membership Plans',
-		translate: 'MEMBERSHIP_PLANS',
+		id: 'settings',
+		title: 'Settings',
+		translate: 'SETTINGS',
 		type: 'item',
-		icon: 'heroicons-solid:document-currency-dollar',
-		url: '/membershipplans',
-	},
-	{
-		id: 'payments',
-		title: 'Payments',
-		translate: 'PAYMENTS',
-		type: 'group',
-		icon: 'heroicons-outline:credit-card',
-		children: [
-			{
-				id: 'payment-records',
-				title: 'Payment Records',
-				translate: 'PAYMENT_RECORDS',
-				type: 'item',
-				url: '/payments/records',
-			},
-			{
-				id: 'due-payments',
-				title: 'Due Payments',
-				translate: 'DUE_PAYMENTS',
-				type: 'item',
-				url: '/payments/due',
-			},
-		],
-	},
-	{
-		id: 'classes',
-		title: 'Classes/Activities',
-		translate: 'CLASSES',
-		type: 'group',
-		icon: 'heroicons-outline:calendar',
-		children: [
-			{
-				id: 'class-schedule',
-				title: 'Class Schedule',
-				translate: 'CLASS_SCHEDULE',
-				type: 'item',
-				url: '/classes/schedule',
-			},
-			{
-				id: 'bookings',
-				title: 'Bookings',
-				translate: 'BOOKINGS',
-				type: 'item',
-				url: '/classes/bookings',
-			},
-		],
-	},
-	{
-		id: 'access-control',
-		title: 'Access Control',
-		translate: 'ACCESS_CONTROL',
-		type: 'item',
-		icon: 'heroicons-outline:lock-closed',
-		url: '/access-control',
+		icon: 'heroicons-outline:user-group',
+		url: '/settings'
 	},
 	{
 		id: 'reports',
@@ -107,7 +53,7 @@ const navigationConfig: FuseNavItemType[] = [
 		type: 'item',
 		icon: 'heroicons-outline:chart-bar',
 		url: '/reports',
-	},
+	}
 ];
 
 export default navigationConfig;

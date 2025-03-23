@@ -1,0 +1,86 @@
+{
+  "moduleName": "Users",
+  "moduleNameLower": "users",
+  "groupField": "first_name",
+  "displayFieldName": true,
+  "backgroundImage": "soccer.jpeg",
+  "listdisplayFields": ["first_name", "last_name"],
+  "fields": [
+    {
+      "name": "user_name",
+      "label": "Username",
+      "placeholder": "Enter username",
+      "type": "string",
+      "validation": "z.string().min(1).max(50)",
+      "required": true,
+      "icon": "heroicons-solid:user",
+      "group": "general",
+      "display": true
+    },
+		{
+      "name": "first_name",
+      "label": "First Name",
+      "placeholder": "Enter player's first name",
+      "type": "string",
+      "validation": "z.string().min(1).max(50)",
+      "required": true,
+      "icon": "heroicons-solid:user",
+      "group": "general",
+      "display": true
+    },
+    {
+      "name": "last_name",
+      "label": "Last Name",
+      "placeholder": "Enter player's last name",
+      "type": "string",
+      "validation": "z.string().min(1).max(50)",
+      "required": true,
+      "icon": "heroicons-solid:user",
+      "group": "general",
+      "display": true
+    },
+		{
+      "name": "password",
+      "label": "Password",
+      "placeholder": "Enter password",
+      "type": "string",
+      "validation": "z.string().min(1).max(50)",
+      "required": true,
+      "icon": "heroicons-solid:user",
+      "group": "general",
+      "display": true
+    },
+		{
+      "name": "created_at",
+      "label": "created at",
+      "placeholder": "YYYY-MM-DD",
+      "type": "date",
+      "validation": "z.string().regex(/\\d{4}-\\d{2}-\\d{2}/)",
+      "required": false,
+      "icon": "heroicons-solid:heart",
+      "group": "general",
+			"display": false
+    },{
+      "name": "updated_at",
+      "label": "updated at",
+      "placeholder": "YYYY-MM-DD",
+      "type": "date",
+      "validation": "z.string().regex(/\\d{4}-\\d{2}-\\d{2}/)",
+      "required": false,
+      "icon": "heroicons-solid:heart",
+      "group": "general",
+			"display": false
+    }
+  ],
+  "apiEndpoints": {
+    "getList": "/api/users",
+    "createItem": "/api/users",
+    "getItem": "/api/users/{id}",
+    "updateItem": "/api/users/{id}",
+    "deleteItem": "/api/users/{id}"
+  },
+  "tagTypes": [
+    "user_item",
+    "users"
+  ]
+}

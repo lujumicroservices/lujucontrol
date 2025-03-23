@@ -1,6 +1,7 @@
 {
   "moduleName": "Fee",
   "moduleNameLower": "fee",
+	"groupField": "status",
   "fields": [
     {
       "name": "property_id",

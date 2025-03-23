@@ -19,6 +19,9 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { showMessage } from '@fuse/core/FuseMessage/fuseMessageSlice';
 import { useAppDispatch } from 'src/store/hooks';
 import useNavigate from '@fuse/hooks/useNavigate';
+import Typography from '@mui/material/Typography';
+import Divider from '@mui/material/Divider';
+
 import {
 	useCreate{{moduleName}}ItemMutation,
 	useDelete{{moduleName}}ItemMutation,
@@ -43,7 +46,9 @@ type FormType = {{moduleName}};
  */
 const schema = z.object({
 	{{#fields}}
-	{{name}}: {{validation}},
+	{{#if display}}
+	{{name}}: {{{validation}}},
+	{{/if}}
 	{{/fields}}
 });
 
@@ -63,7 +68,7 @@ function {{moduleName}}Form(props: {{moduleName}}FormProps) {
 	const { {{moduleNameLower}}Id } = routeParams;
 
 	const { data: {{moduleNameLower}}, isError } = useGet{{moduleName}}ItemQuery({{moduleNameLower}}Id, {
-		skip: !{{moduleNameLower}}Id || {{moduleNameLower}}Id === null
+		skip: !{{moduleNameLower}}Id || {{moduleNameLower}}Id === 'new'
 	});
 
 	const [create{{moduleName}}] = useCreate{{moduleName}}ItemMutation();
@@ -114,7 +119,7 @@ function {{moduleName}}Form(props: {{moduleName}}FormProps) {
 		});
 	}
 
-	const name = watch('first_name');
+	const name = watch('name');
 
 	if (isError && !isNew) {
 		setTimeout(() => {
@@ -139,7 +144,7 @@ function {{moduleName}}Form(props: {{moduleName}}FormProps) {
 			>
 				<img
 					className="absolute inset-0 object-cover w-full h-full"
-					src="/assets/images/cards/default-bk.jpg"
+					src="/assets/images/cards/{{backgroundImage}}"
 					alt="user background"
 				/>
 			</Box>
@@ -237,33 +242,54 @@ function {{moduleName}}Form(props: {{moduleName}}FormProps) {
 					</div>
 				</div>
 
-				{{#fields}}
-				<Controller
-					control={control}
-					name="{{name}}"
-					render={({ field }) => (
-						<TextField
-							className="mt-8"
-							{...field}
-							label="{{label}}"
-							placeholder="{{placeholder}}"
-							id="{{name}}"
-							error={!!errors.{{name}} }
-							helperText={errors?.{{name}}?.message}
-							variant="outlined"
-							{{#required}}required{{/required}}
-							fullWidth							
-							InputProps={{open}}
-							startAdornment: (
-								<InputAdornment position="start">
-									<FuseSvgIcon size={20}>{{icon}}</FuseSvgIcon>
-								</InputAdornment>
-							),
-							{{close}}
-						/>
-					)}
-				/>
-				{{/fields}}
+				{{#each (groupFields fields)}}
+				<div className="field-group">
+				<Typography variant="h6" sx=\{{ 
+						fontWeight: 'bold', mb: 2 
+					}}
+				>
+					<FuseSvgIcon size={20} className="mr-2">heroicons-outline:collection</FuseSvgIcon>
+					{{@key}}
+				</Typography>
+				<Divider className="mb-4" />
+				<div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+				{{#each this}}
+				{{#if display}}
+					<Controller
+						control={control}
+						name="{{name}}"
+						render={({ field }) => (
+							<TextField
+								className="mt-8"
+								{...field}
+								label="{{label}}"
+								placeholder="{{placeholder}}"
+								id="{{name}}"
+								error={!!errors.{{name}} }
+								helperText={errors?.{{name}}?.message}
+								variant="outlined"
+								{{#required}}required{{/required}}
+								fullWidth							
+								InputProps= \{{
+									startAdornment: (
+										<InputAdornment position="start">
+											<FuseSvgIcon size={20}>{{icon}}</FuseSvgIcon>
+										</InputAdornment>
+									)
+								}}
+								{{#eq-block type "number"}}
+									onChange={(e) => field.onChange(e.target.value ? Number(e.target.value) : "")}
+								{{/eq-block}}
+							/>
+						)}
+					/>
+				{{/if}}
+			{{/each}}
+			
+								</div>
+							</div>
+				{{/each}}
 
 
 				<Box

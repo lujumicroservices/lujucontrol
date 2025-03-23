@@ -29,15 +29,13 @@ export async function GET(req: Request) {
  * POST api/{{moduleNameLower}}/items
  */
 export async function POST(req: Request) {
-	const requestData = (await req.json()) as Tables<'{{moduleNameLower}}'>;	// Parse the incoming JSON
+	const insertData = (await req.json()) as Tables<'{{moduleNameLower}}'>;	// Parse the incoming JSON
 
-	// Remove the `id` field if present (to allow auto-increment behavior)
-	const { id, ...insertData } = requestData;
-
+	
 	// Add the current datetime to the `created_at` field
 	insertData.created_at = new Date().toISOString();
 	// Insert the new {{moduleNameLower}} item into the '{{moduleNameLower}}_items' table
-	const { data: newItem, error } = await supabase
+	const { error } = await supabase
 		.from('{{moduleNameLower}}')	// Your table name
 		.insert([insertData]);	// Insert the new {{moduleNameLower}} item
 
@@ -45,5 +43,5 @@ export async function POST(req: Request) {
 		return new Response(JSON.stringify({ error: error.message }), { status: 500 });
 	}
 
-	return new Response(JSON.stringify(newItem), { status: 201 });
+	return new Response(JSON.stringify(insertData), { status: 201 });
 }
