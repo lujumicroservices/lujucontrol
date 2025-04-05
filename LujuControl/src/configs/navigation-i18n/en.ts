@@ -10,7 +10,10 @@ const locale = {
 	CLASS_SCHEDULE: 'Class Schedule',
 	BOOKINGS: 'Bookings',
 	ACCESS_CONTROL: 'Access Control',
-	REPORTS: 'Reports'
+	REPORTS: 'Reports',
+	USERS: 'Users',
+	PLAYERS: 'Player',
+	SETTINGS: 'Settings'
 };
 
 export default locale;

@@ -1,7 +1,9 @@
 const locale = {
 	TITLE: 'MembersPage Page',
 		CATALOG:'User',
-		ADD:'Add'
+		ADD:'Add',
+		SEARCHBOX:'search uver',
+		
 };
 
 export default locale;

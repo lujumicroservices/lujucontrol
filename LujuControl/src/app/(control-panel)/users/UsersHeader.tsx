@@ -10,6 +10,8 @@ import { ChangeEvent, useEffect } from 'react';
 import PageBreadcrumb from 'src/components/PageBreadcrumb';
 import { setSearchText, resetSearchText, selectSearchText } from './usersAppSlice';
 import { selectFilteredUsersList, useGetUsersListQuery } from './UsersApi';
+import {useTranslation} from 'react-i18next';
+
 
 /**
  * The users header.
@@ -18,8 +20,8 @@ function UsersHeader() {
 	const dispatch = useAppDispatch();
 	const searchText = useAppSelector(selectSearchText);
 	const { data, isLoading } = useGetUsersListQuery();
-
 	const filteredData = useAppSelector(selectFilteredUsersList(data));
+    const {t} = useTranslation('usermodule');
 
 	useEffect(() => {
 		return () => {
@@ -40,7 +42,7 @@ function UsersHeader() {
 					initial={{ x: -20 }}
 					animate={{ x: 0, transition: { delay: 0.2 } }}
 				>
-					<Typography className="text-4xl font-extrabold leading-none tracking-tight">Users</Typography>
+					<Typography className="text-4xl font-extrabold leading-none tracking-tight">{t('CATALOG')}</Typography>
 				</motion.span>
 				<motion.span
 					initial={{ y: -20, opacity: 0 }}
@@ -65,7 +67,7 @@ function UsersHeader() {
 					<FuseSvgIcon color="action">heroicons-outline:magnifying-glass</FuseSvgIcon>
 
 					<Input
-						placeholder="Search users"
+						placeholder={t('SEARCHBOX')}
 						className="flex flex-1"
 						disableUnderline
 						fullWidth
@@ -84,7 +86,7 @@ function UsersHeader() {
 					to="/users/new"
 				>
 					<FuseSvgIcon size={20}>heroicons-outline:plus</FuseSvgIcon>
-					<span className="hidden sm:flex mx-2">Add</span>
+					<span className="hidden sm:flex mx-2">{t('ADD')}</span>
 				</Button>
 			</div>
 		</div>

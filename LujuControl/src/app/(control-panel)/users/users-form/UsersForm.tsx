@@ -21,6 +21,7 @@ import { useAppDispatch } from 'src/store/hooks';
 import useNavigate from '@fuse/hooks/useNavigate';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
+import {useTranslation} from 'react-i18next';
 
 import {
 	useCreateUsersItemMutation,
@@ -62,7 +63,7 @@ function UsersForm(props: UsersFormProps) {
 	const { isNew } = props;
 	const navigate = useNavigate();
 	const dispatch = useAppDispatch();
-
+    const {t} = useTranslation('usermodule');
 	const routeParams = useParams<{ usersId: string }>();
 	const { usersId } = routeParams;
 
@@ -260,7 +261,7 @@ function UsersForm(props: UsersFormProps) {
 								className="mt-8"
 								{...field}
 								label="Username"
-								placeholder="Enter username"
+								placeholder={t('USERNAME')}
 								id="user_name"
 								error={!!errors.user_name }
 								helperText={errors?.user_name?.message}

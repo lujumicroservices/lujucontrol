@@ -10,6 +10,7 @@ import UsersHeader from './UsersHeader';
 import UsersList from './users-list/UsersList';
 import { useGetUsersListQuery, useGetUsersCountriesQuery } from './UsersApi';
 import UsersSidebarContent from './UsersSidebarContent';
+import './i18n';
 
 const Root = styled(FusePageSimple)(({ theme }) => ({
 	'& .container': {
@@ -37,7 +38,7 @@ function UsersApp(props: UsersAppProps) {
 	const pageLayout = useRef(null);
 	const isMobile = useThemeMediaQuery((theme) => theme.breakpoints.down('lg'));
 	useGetUsersListQuery();
-	useGetUsersCountriesQuery();
+
 
 	useEffect(() => {
 		setRightSidebarOpen(!!routeParams.usersId);

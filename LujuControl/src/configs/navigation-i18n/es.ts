@@ -1,5 +1,5 @@
 const locale = {
-	DASHBOARD: 'Dashboard',
+	DASHBOARD: 'Inicio',
 	MEMBERS: 'Miembros',
 	STAFF: 'Personal',
 	MEMBERSHIP_PLANS: 'Planes de Membresía',
@@ -10,7 +10,10 @@ const locale = {
 	CLASS_SCHEDULE: 'Horario de Clases',
 	BOOKINGS: 'Reservas',
 	ACCESS_CONTROL: 'Control de Acceso',
-	REPORTS: 'Informesotes'
+	REPORTS: 'Informes',
+	USERS: 'Usuarios',
+	PLAYERS: 'Jugadores',
+	SETTINGS: 'Configuracion'
 };
 
 export default locale;
