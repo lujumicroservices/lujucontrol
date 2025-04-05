@@ -16,69 +16,26 @@ const PaymentTransactionApi = api
 	})
 	.injectEndpoints({
 		endpoints: (build) => ({
-			getPlayerPaymentItem: build.query<GetPlayerPaymentItemApiResponse, GetPlayerPaymentItemApiArg>({
+			getPlayerPaymentsList: build.query<GetPlayerPaymentsListApiResponse, GetPlayerPaymentsListApiArg>({
 				query: (player_id) => ({ url: `/api/mock/payment_transaction/items/${player_id}` }),
 				providesTags: ['payment_transaction']
 			}),
-			getPaymentTransactionList: build.query<
-				GetPaymentTransactionListApiResponse,
-				GetPaymentTransactionListApiArg
-			>({
-				query: (player_id) => ({ url: `/api/mock/payment_transaction/items/${player_id}` }),
+			getPlayersPaymentStatusList: build.query<GetPlayersPaymentStatusListApiResponse,GetPlayersPaymentStatusListApiArg>({
+				query: () => ({ url: `/api/mock/payment_transaction/items` }),
 				providesTags: ['payment_transaction']
-			}),
-			createPaymentTransactionItem: build.mutation<
-				CreatePaymentTransactionItemApiResponse,
-				CreatePaymentTransactionItemApiArg
-			>({
-				query: (queryArg) => ({
-					url: `/api/mock/payment_transaction/items`,
-					method: 'POST',
-					body: queryArg.payment_transaction
-				}),
-				invalidatesTags: ['payment_transaction']
-			}),
-			getPaymentTransactionItem: build.query<
-				GetPaymentTransactionItemApiResponse,
-				GetPaymentTransactionItemApiArg
-			>({
-				query: (payment_transactionId) => ({
-					url: `/api/mock/payment_transaction/items/${payment_transactionId}`
-				}),
-				providesTags: ['payment_transaction_item']
-			}),
-			updatePaymentTransactionItem: build.mutation<
-				UpdatePaymentTransactionItemApiResponse,
-				UpdatePaymentTransactionItemApiArg
-			>({
-				query: (payment_transaction) => ({
-					url: `/api/mock/payment_transaction/items/${payment_transaction.id}`,
-					method: 'PUT',
-					body: payment_transaction
-				}),
-				invalidatesTags: ['payment_transaction_item', 'payment_transaction']
-			}),
-			deletePaymentTransactionItem: build.mutation<
-				DeletePaymentTransactionItemApiResponse,
-				DeletePaymentTransactionItemApiArg
-			>({
-				query: (payment_transactionId) => ({
-					url: `/api/mock/payment_transaction/items/${payment_transactionId}`,
-					method: 'DELETE'
-				}),
-				invalidatesTags: ['payment_transaction']
 			})
+
 		}),
 		overrideExisting: false
 	});
 
 export default PaymentTransactionApi;
 
-export type GetPlayerPaymentItemApiResponse = /** status 200 User Found */ Payments;
-export type GetPlayerPaymentItemApiArg = string;
+export type GetPlayerPaymentsListApiResponse = /** status 200 User Found */ PaymentTransaction[];
+export type GetPlayerPaymentsListApiArg = string;
 
-export type GetPaymentTransactionItemApiResponse = /** status 200 User Found */ PaymentTransaction;
-export type GetPaymentTransactionItemApiArg = string;
+export type GetPlayersPaymentStatusListApiResponse = /** status 200 User Found */ PaymentTransaction[];
+export type GetPlayersPaymentStatusListApiArg = void;
 
 export type UpdatePaymentTransactionItemApiResponse = /** status 200 PaymentTransaction Updated */ PaymentTransaction;
 export type UpdatePaymentTransactionItemApiArg = PaymentTransaction;
@@ -86,15 +43,10 @@ export type UpdatePaymentTransactionItemApiArg = PaymentTransaction;
 export type DeletePaymentTransactionItemApiResponse = unknown;
 export type DeletePaymentTransactionItemApiArg = string;
 
-export type GetPaymentTransactionListApiResponse = /** status 200 OK */ PaymentTransaction[];
-export type GetPaymentTransactionListApiArg = string;
-
 export type CreatePaymentTransactionItemApiResponse = /** status 201 Created */ PaymentTransaction;
 export type CreatePaymentTransactionItemApiArg = {
 	payment_transaction: PaymentTransaction;
 };
-
-
 
 export type PaymentTransaction = {
 	id: string;
@@ -126,13 +78,9 @@ export type GroupedPaymentTransaction = {
 
 export type AccumulatorType = Record<string, GroupedPaymentTransaction>;
 
-export const {	
-	useGetPaymentTransactionItemQuery,
-	useUpdatePaymentTransactionItemMutation,
-	useDeletePaymentTransactionItemMutation,
-	useGetPaymentTransactionListQuery,
-	useCreatePaymentTransactionItemMutation,
-	useGetPlayerPaymentItemQuery
+export const { 
+	useGetPlayerPaymentsListQuery, 
+	useGetPlayersPaymentStatusListQuery 
 } = PaymentTransactionApi;
 
 export type PaymentTransactionApiType = {

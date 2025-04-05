@@ -12,12 +12,10 @@ import FuseLoading from '@fuse/core/FuseLoading';
 import PageBreadcrumb from 'src/components/PageBreadcrumb';
 import FuseTabs from 'src/components/tabs/FuseTabs';
 import FuseTab from 'src/components/tabs/FuseTab';
-import InvoiceTab from './tabs/invoice/InvoiceTab';
-import DetailsTab from './tabs/details/DetailsTab';
-import ProductsTab from './tabs/products/ProductsTab';
-import { useGetPaymentTransactionListQuery } from '../PaymentTransactionApi';
-
-
+//import InvoiceTab from './tabs/invoice/InvoiceTab';
+//import DetailsTab from './tabs/details/DetailsTab';
+//import ProductsTab from './tabs/products/ProductsTab';
+import { useGetPlayerPaymentsListQuery } from '../PaymentTransactionApi';
 
 /**
  * The player.
@@ -30,7 +28,7 @@ function Player() {
 		data: player,
 		isLoading,
 		isError
-	} = useGetPaymentTransactionListQuery(playerId, {
+	} = useGetPlayerPaymentsListQuery(playerId, {
 		skip: !playerId
 	});
 
@@ -78,7 +76,7 @@ function Player() {
 	return (
 		<FusePageCarded
 			header={
-				order && (
+				player && (
 					<div className="flex flex-1 flex-col py-8">
 						<motion.div
 							initial={{ x: 20, opacity: 0 }}
@@ -114,7 +112,7 @@ function Player() {
 					>
 						<FuseTab
 							value="details"
-							label="Order Details"
+							label="Order Details s"
 						/>
 						<FuseTab
 							value="products"
@@ -125,13 +123,7 @@ function Player() {
 							label="Invoice"
 						/>
 					</FuseTabs>
-					{order && (
-						<>
-							{tabValue === 'details' && <DetailsTab />}
-							{tabValue === 'products' && <ProductsTab />}
-							{tabValue === 'invoice' && <InvoiceTab order={order} />}
-						</>
-					)}
+					
 				</div>
 			}
 			scroll={isMobile ? 'normal' : 'content'}

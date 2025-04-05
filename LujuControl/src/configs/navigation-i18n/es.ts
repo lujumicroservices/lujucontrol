@@ -10,7 +10,7 @@ const locale = {
 	CLASS_SCHEDULE: 'Horario de Clases',
 	BOOKINGS: 'Reservas',
 	ACCESS_CONTROL: 'Control de Acceso',
-	REPORTS: 'Informes'
+	REPORTS: 'Informesotes'
 };
 
 export default locale;

@@ -89,10 +89,8 @@ export async function GET(req: Request) {
  * POST api/payment_transaction/items
  */
 export async function POST(req: Request) {
-	
-	const insertData = (await req.json()) as Tables<'payment_transaction'>;	// Parse the incoming JSON
+	const insertData = (await req.json()) as Tables<'payment_transaction'>; // Parse the incoming JSON
 
-	
 	// Add the current datetime to the `created_at` field
 	insertData.created_at = new Date().toISOString();
 	// Insert the new payment_transaction item into the 'payment_transaction_items' table

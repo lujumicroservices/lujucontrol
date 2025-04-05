@@ -12,7 +12,7 @@ import TableRow from '@mui/material/TableRow';
 import TableCell from '@mui/material/TableCell';
 import Table from '@mui/material/Table';
 import TableHead from '@mui/material/TableHead';
-import { useGetECommerceOrderQuery } from '../../../../ECommerceApi';
+import { useGe } from '../PlayerPaymentsApi';
 import OrdersStatus from '../../../PlayerPaymentsStatus';
 import GoogleAddressMap from './GoogleAddressMap';
 
