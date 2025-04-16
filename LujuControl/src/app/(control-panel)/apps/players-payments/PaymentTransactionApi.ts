@@ -12,40 +12,51 @@ export const addTagTypes = [
 
 const PaymentTransactionApi = api
 	.enhanceEndpoints({
-		addTagTypes
+		addTagTypes: ['payment_transaction'] // Define tag types here
 	})
 	.injectEndpoints({
 		endpoints: (build) => ({
 			getPlayerPaymentsList: build.query<GetPlayerPaymentsListApiResponse, GetPlayerPaymentsListApiArg>({
-				query: (player_id) => ({ url: `/api/mock/payment_transaction/items/${player_id}` }),
+				query: ({ player_id, start_date }) => ({
+					url: `/api/mock/payment_transaction/player/${player_id}?start_date=${start_date}`
+				}),
 				providesTags: ['payment_transaction']
 			}),
-			getPlayersPaymentStatusList: build.query<GetPlayersPaymentStatusListApiResponse,GetPlayersPaymentStatusListApiArg>({
-				query: () => ({ url: `/api/mock/payment_transaction/items` }),
+
+			payPlayerBillingPeriod: build.mutation<
+				PaymentTransaction,
+				{ player_id: string; billing_period: string; paid_amount: number }
+			>({
+				query: ({ player_id, billing_period, paid_amount }) => ({
+					url: `/api/mock/payment_transaction/player/${player_id}`,
+					method: 'POST',
+					body: {
+						player_id,
+						billing_period,
+						paid_amount // Added paid_amount to the request body
+					}
+				}),
+				invalidatesTags: ['payment_transaction']
+			}),
+			getAllPlayersPaymentStatus: build.query<Payments[], void>({
+				query: () => ({
+					url: `/api/mock/payment_transaction/player`
+				}),
 				providesTags: ['payment_transaction']
 			})
-
 		}),
 		overrideExisting: false
 	});
 
 export default PaymentTransactionApi;
 
+// Response Type
 export type GetPlayerPaymentsListApiResponse = /** status 200 User Found */ PaymentTransaction[];
-export type GetPlayerPaymentsListApiArg = string;
 
-export type GetPlayersPaymentStatusListApiResponse = /** status 200 User Found */ PaymentTransaction[];
-export type GetPlayersPaymentStatusListApiArg = void;
-
-export type UpdatePaymentTransactionItemApiResponse = /** status 200 PaymentTransaction Updated */ PaymentTransaction;
-export type UpdatePaymentTransactionItemApiArg = PaymentTransaction;
-
-export type DeletePaymentTransactionItemApiResponse = unknown;
-export type DeletePaymentTransactionItemApiArg = string;
-
-export type CreatePaymentTransactionItemApiResponse = /** status 201 Created */ PaymentTransaction;
-export type CreatePaymentTransactionItemApiArg = {
-	payment_transaction: PaymentTransaction;
+// Argument Type: Represents the expected shape of arguments passed to the query
+export type GetPlayerPaymentsListApiArg = {
+	player_id: string;
+	start_date: string;
 };
 
 export type PaymentTransaction = {
@@ -69,8 +80,6 @@ export type Payments = {
 	payment_status: string;
 };
 
-
-
 export type GroupedPaymentTransaction = {
 	group: string;
 	children?: PaymentTransaction[];
@@ -78,9 +87,10 @@ export type GroupedPaymentTransaction = {
 
 export type AccumulatorType = Record<string, GroupedPaymentTransaction>;
 
-export const { 
-	useGetPlayerPaymentsListQuery, 
-	useGetPlayersPaymentStatusListQuery 
+export const {
+	useGetPlayerPaymentsListQuery,
+	usePayPlayerBillingPeriodMutation,
+	useGetAllPlayersPaymentStatusQuery // ← add this
 } = PaymentTransactionApi;
 
 export type PaymentTransactionApiType = {

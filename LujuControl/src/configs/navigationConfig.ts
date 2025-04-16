@@ -16,11 +16,11 @@ i18n.addResourceBundle('es', 'navigation', es);
 const navigationConfig: FuseNavItemType[] = [
 	{
 		id: 'dashboard',
-		title: 'Dashboard',
-		translate: 'DASHBOARD',
+		title: 'Payments',
+		translate: 'PAYMENTS',
 		type: 'item',
 		icon: 'heroicons-outline:home',
-		url: '/dashboard',
+		url: '/apps/players-payments',
 	},
 	{
 		id: 'users',
