@@ -10,6 +10,7 @@ import { ChangeEvent, useEffect } from 'react';
 import PageBreadcrumb from 'src/components/PageBreadcrumb';
 import { setSearchText, resetSearchText, selectSearchText } from './playerAppSlice';
 import { selectFilteredPlayerList, useGetPlayerListQuery } from './PlayerApi';
+import {useTranslation} from 'react-i18next';
 
 /**
  * The player header.
@@ -18,7 +19,7 @@ function PlayerHeader() {
 	const dispatch = useAppDispatch();
 	const searchText = useAppSelector(selectSearchText);
 	const { data, isLoading } = useGetPlayerListQuery();
-
+    const {t} = useTranslation('memberspage');
 	const filteredData = useAppSelector(selectFilteredPlayerList(data));
 
 	useEffect(() => {
@@ -40,7 +41,7 @@ function PlayerHeader() {
 					initial={{ x: -20 }}
 					animate={{ x: 0, transition: { delay: 0.2 } }}
 				>
-					<Typography className="text-4xl font-extrabold leading-none tracking-tight">Player</Typography>
+					<Typography className="text-4xl font-extrabold leading-none tracking-tight">{t('PLAYER')}</Typography>
 				</motion.span>
 				<motion.span
 					initial={{ y: -20, opacity: 0 }}
@@ -51,7 +52,7 @@ function PlayerHeader() {
 						className="text-base font-medium ml-0.5"
 						color="text.secondary"
 					>
-						{`${filteredData?.length} player`}
+						{`${filteredData?.length} `} {t('PLAYERS')}
 					</Typography>
 				</motion.span>
 			</div>
@@ -65,7 +66,7 @@ function PlayerHeader() {
 					<FuseSvgIcon color="action">heroicons-outline:magnifying-glass</FuseSvgIcon>
 
 					<Input
-						placeholder="Search player"
+						placeholder={t('SEARCHPLAYER')}
 						className="flex flex-1"
 						disableUnderline
 						fullWidth
@@ -84,7 +85,8 @@ function PlayerHeader() {
 					to="/player/new"
 				>
 					<FuseSvgIcon size={20}>heroicons-outline:plus</FuseSvgIcon>
-					<span className="hidden sm:flex mx-2">Add</span>
+					<span className="hidden sm:flex mx-2">{t('ADD')}
+					</span>
 				</Button>
 			</div>
 		</div>

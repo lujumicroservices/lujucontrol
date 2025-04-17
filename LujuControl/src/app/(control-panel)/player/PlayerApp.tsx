@@ -10,6 +10,7 @@ import PlayerHeader from './PlayerHeader';
 import PlayerList from './player-list/PlayerList';
 import { useGetPlayerListQuery, useGetPlayerCountriesQuery } from './PlayerApi';
 import PlayerSidebarContent from './PlayerSidebarContent';
+import './i18n';
 
 const Root = styled(FusePageSimple)(({ theme }) => ({
 	'& .container': {

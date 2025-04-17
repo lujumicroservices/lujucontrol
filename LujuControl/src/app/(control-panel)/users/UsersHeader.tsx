@@ -53,7 +53,8 @@ function UsersHeader() {
 						className="text-base font-medium ml-0.5"
 						color="text.secondary"
 					>
-						{`${filteredData?.length} users`}
+						{`${filteredData?.length} `} {t('USERS')}
+
 					</Typography>
 				</motion.span>
 			</div>

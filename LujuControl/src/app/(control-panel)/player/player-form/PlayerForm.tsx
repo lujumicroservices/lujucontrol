@@ -21,6 +21,7 @@ import { useAppDispatch } from 'src/store/hooks';
 import useNavigate from '@fuse/hooks/useNavigate';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
+import {useTranslation} from 'react-i18next';
 
 import {
 	useCreatePlayerItemMutation,
@@ -49,10 +50,12 @@ const schema = z.object({
 	last_name: z.string().min(1).max(50),
 	birth_date: z.string().regex(/\d{4}-\d{2}-\d{2}/),
 	jersey_number: z.number().int().min(0).max(99),
-	position: z.enum(['Goalkeeper', 'Defender', 'Midfielder', 'Forward']),
+	position: z.enum(['Portero', 'Defensa', 'Mediocampista', 'Delantero']),
 	team_name: z.string().min(1).max(100),
 	medical_conditions: z.string().max(500).optional(),
 });
+
+
 
 type PlayerFormProps = {
 	isNew?: boolean;
@@ -65,7 +68,7 @@ function PlayerForm(props: PlayerFormProps) {
 	const { isNew } = props;
 	const navigate = useNavigate();
 	const dispatch = useAppDispatch();
-
+    const {t} = useTranslation('memberspage');
 	const routeParams = useParams<{ playerId: string }>();
 	const { playerId } = routeParams;
 
@@ -262,8 +265,8 @@ function PlayerForm(props: PlayerFormProps) {
 							<TextField
 								className="mt-8"
 								{...field}
-								label="First Name"
-								placeholder="Enter player&#x27;s first name"
+								label={t('FN')}
+								placeholder={t('PFN')}
 								id="first_name"
 								error={!!errors.first_name }
 								helperText={errors?.first_name?.message}
@@ -287,8 +290,8 @@ function PlayerForm(props: PlayerFormProps) {
 							<TextField
 								className="mt-8"
 								{...field}
-								label="Last Name"
-								placeholder="Enter player&#x27;s last name"
+								label={t('LN')}
+								placeholder={t('PLN')}
 								id="last_name"
 								error={!!errors.last_name }
 								helperText={errors?.last_name?.message}
@@ -312,8 +315,8 @@ function PlayerForm(props: PlayerFormProps) {
 							<TextField
 								className="mt-8"
 								{...field}
-								label="Date of Birth"
-								placeholder="YYYY-MM-DD"
+								label={t('DOB')}
+								placeholder={t('YMA')}
 								id="birth_date"
 								error={!!errors.birth_date }
 								helperText={errors?.birth_date?.message}
@@ -337,8 +340,8 @@ function PlayerForm(props: PlayerFormProps) {
 							<TextField
 								className="mt-8"
 								{...field}
-								label="Jersey Number"
-								placeholder="Enter jersey number"
+								label={t('JN')}
+								placeholder={t('EJN')}
 								id="jersey_number"
 								error={!!errors.jersey_number }
 								helperText={errors?.jersey_number?.message}
@@ -363,8 +366,8 @@ function PlayerForm(props: PlayerFormProps) {
 							<TextField
 								className="mt-8"
 								{...field}
-								label="Position"
-								placeholder="Select position"
+								label={t('P')}
+								placeholder={t('SP')}
 								id="position"
 								error={!!errors.position }
 								helperText={errors?.position?.message}
@@ -388,8 +391,8 @@ function PlayerForm(props: PlayerFormProps) {
 							<TextField
 								className="mt-8"
 								{...field}
-								label="Team Name"
-								placeholder="Enter team name"
+								label={t('TN')}
+								placeholder={t('ETN')}
 								id="team_name"
 								error={!!errors.team_name }
 								helperText={errors?.team_name?.message}
@@ -427,8 +430,8 @@ function PlayerForm(props: PlayerFormProps) {
 							<TextField
 								className="mt-8"
 								{...field}
-								label="Medical Conditions"
-								placeholder="List any medical conditions"
+								label={t('MC')}
+								placeholder={t('LMC')}
 								id="medical_conditions"
 								error={!!errors.medical_conditions }
 								helperText={errors?.medical_conditions?.message}

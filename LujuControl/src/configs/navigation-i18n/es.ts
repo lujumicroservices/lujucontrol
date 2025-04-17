@@ -14,6 +14,7 @@ const locale = {
 	USERS: 'Usuarios',
 	PLAYERS: 'Jugadores',
 	SETTINGS: 'Configuracion'
+
 };
 
 export default locale;

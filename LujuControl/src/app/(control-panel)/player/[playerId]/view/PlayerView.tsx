@@ -17,6 +17,7 @@ import { showMessage } from '@fuse/core/FuseMessage/fuseMessageSlice';
 import { useAppDispatch } from 'src/store/hooks';
 import useNavigate from '@fuse/hooks/useNavigate';
 import { useGetPlayerItemQuery, useGetPlayerCountriesQuery } from '../../PlayerApi';
+import {useTranslation} from 'react-i18next';
 
 
 /**
@@ -27,7 +28,7 @@ function PlayerView() {
 
 	const routeParams = useParams<{ playerId: string }>();
 	const { playerId } = routeParams;
-	
+	const {t} = useTranslation('memberspage');
 	const {
 		data: player,
 		isLoading,
@@ -160,7 +161,7 @@ function PlayerView() {
 											}}
 										/>
 										<TextField
-											label="Date of Birth"
+											label={t('DOB')}
 											value={ player.birth_date }
 											variant="outlined"
 											fullWidth

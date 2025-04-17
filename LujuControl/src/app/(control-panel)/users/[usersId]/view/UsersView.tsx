@@ -132,7 +132,7 @@ function UsersView() {
 								<Divider className="mb-4" />
 								<div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
 										<TextField
-											label="Username"
+											label= {t('USERNAME')}
 											value={ users.user_name }
 											variant="outlined"
 											fullWidth
@@ -147,7 +147,7 @@ function UsersView() {
 											}}
 										/>
 										<TextField
-											label="First Name"
+											label={t('FIRSTNAME')}
 											value={ users.first_name }
 											variant="outlined"
 											fullWidth
@@ -162,7 +162,7 @@ function UsersView() {
 											}}
 										/>
 										<TextField
-											label="Last Name"
+											label={t('LASTNAME')}
 											value={ users.last_name }
 											variant="outlined"
 											fullWidth
@@ -177,7 +177,7 @@ function UsersView() {
 											}}
 										/>
 										<TextField
-											label="Password"
+											label={t('PASWORD')}
 											value={ users.password }
 											variant="outlined"
 											fullWidth

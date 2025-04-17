@@ -260,7 +260,7 @@ function UsersForm(props: UsersFormProps) {
 							<TextField
 								className="mt-8"
 								{...field}
-								label="Username"
+								label={t('USERNAME')}
 								placeholder={t('USERNAME')}
 								id="user_name"
 								error={!!errors.user_name }
@@ -285,8 +285,8 @@ function UsersForm(props: UsersFormProps) {
 							<TextField
 								className="mt-8"
 								{...field}
-								label="First Name"
-								placeholder="Enter player&#x27;s first name"
+								label={t('FIRSTNAME')}
+								placeholder={t('PLAYERFIRSTNAME')}
 								id="first_name"
 								error={!!errors.first_name }
 								helperText={errors?.first_name?.message}
@@ -310,8 +310,8 @@ function UsersForm(props: UsersFormProps) {
 							<TextField
 								className="mt-8"
 								{...field}
-								label="Last Name"
-								placeholder="Enter player&#x27;s last name"
+								label={t('LASTNAME')}
+								placeholder={t('PLAYERLASTNAME')}
 								id="last_name"
 								error={!!errors.last_name }
 								helperText={errors?.last_name?.message}
@@ -335,8 +335,8 @@ function UsersForm(props: UsersFormProps) {
 							<TextField
 								className="mt-8"
 								{...field}
-								label="Password"
-								placeholder="Enter password"
+								label={t('PASWORD')}
+								placeholder={t('ENTERPASWORD')}
 								id="password"
 								error={!!errors.password }
 								helperText={errors?.password?.message}
