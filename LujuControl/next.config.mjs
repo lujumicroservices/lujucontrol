@@ -11,11 +11,16 @@ const nextConfig = {
 		ignoreBuildErrors: true
 	},
 	webpack: (config) => {
+		// Enable source maps in development mode
+		
+		
+		
+
+		// Add your custom rule here if necessary (it appears you're adding a rule for raw files)
 		if (config.module && config.module.rules) {
 			config.module.rules.push({
 				test: /\.(json|js|ts|tsx|jsx)$/,
 				resourceQuery: /raw/,
-				
 			});
 		}
 

@@ -7,11 +7,11 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Link from '@fuse/core/Link';
 import FuseLoading from '@fuse/core/FuseLoading';
-import { Payments, useGetPlayersPaymentStatusListQuery } from './PaymentTransactionApi';
+import { Payments, useGetAllPlayersPaymentStatusQuery } from './PaymentTransactionApi';
 import OrdersStatus from './PlayerPaymentsStatus';
 
 function PlayerPaymentsTable() {
-	const { data: orders, isLoading } = useGetPlayersPaymentStatusListQuery();
+	const { data: orders, isLoading } = useGetAllPlayersPaymentStatusQuery();
 	
 	const columns = useMemo<MRT_ColumnDef<Payments>[]>(
 		() => [

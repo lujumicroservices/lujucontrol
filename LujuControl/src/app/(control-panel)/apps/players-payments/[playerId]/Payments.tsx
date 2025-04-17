@@ -13,9 +13,10 @@ import PageBreadcrumb from 'src/components/PageBreadcrumb';
 import FuseTabs from 'src/components/tabs/FuseTabs';
 import FuseTab from 'src/components/tabs/FuseTab';
 //import InvoiceTab from './tabs/invoice/InvoiceTab';
-//import DetailsTab from './tabs/details/DetailsTab';
+import DetailsTab from './tabs/details/DetailsTab';
 //import ProductsTab from './tabs/products/ProductsTab';
-import { useGetPlayerPaymentsListQuery } from '../PaymentTransactionApi';
+//import { useGetPlayerPaymentsListQuery } from '../PaymentTransactionApi';
+import { useGetPlayerItemQuery } from '../../../player/PlayerApi';
 
 /**
  * The player.
@@ -28,9 +29,7 @@ function Player() {
 		data: player,
 		isLoading,
 		isError
-	} = useGetPlayerPaymentsListQuery(playerId, {
-		skip: !playerId
-	});
+	} = useGetPlayerItemQuery(playerId );
 
 	const isMobile = useThemeMediaQuery((_theme) => _theme.breakpoints.down('lg'));
 
@@ -90,17 +89,31 @@ function Player() {
 							animate={{ x: 0, opacity: 1, transition: { delay: 0.3 } }}
 							className="flex flex-col min-w-0"
 						>
-							<Typography className="text-2xl truncate font-semibold">
-								{`Payments`}
-							</Typography>
-							<Typography
-								variant="caption"
-								className="font-medium"
-							>
-								{`From ${player.player_name}}`}
-							</Typography>
+							<div className="flex justify-between items-center">
+								<div>
+									<Typography className="text-2xl truncate font-semibold">
+										{`Payments`}
+									</Typography>
+									<Typography variant="caption" className="font-medium">
+										{`From ${player.first_name} ${player.last_name}`}
+									</Typography>
+								</div>
+
+								<div className="text-right">
+									{/* Current date */}
+									<Typography variant="body2" className="font-medium">
+										{new Date().toLocaleDateString()} {/* Format date as required */}
+									</Typography>
+
+									{/* Status label */}
+									<Typography variant="body2" className="font-medium">
+										{player.status} {/* Assuming 'status' is a property of the player object */}
+									</Typography>
+								</div>
+							</div>
 						</motion.div>
 					</div>
+
 				)
 			}
 			content={
@@ -112,7 +125,7 @@ function Player() {
 					>
 						<FuseTab
 							value="details"
-							label="Order Details s"
+							label="@@detalle de pagos"
 						/>
 						<FuseTab
 							value="products"
@@ -123,6 +136,13 @@ function Player() {
 							label="Invoice"
 						/>
 					</FuseTabs>
+					{player && (
+						<>
+							{tabValue === 'details' && <DetailsTab />}
+							{tabValue === 'products' && <ProductsTab />}
+							{tabValue === 'invoice' && <InvoiceTab order={player} />}
+						</>
+					)}
 					
 				</div>
 			}
